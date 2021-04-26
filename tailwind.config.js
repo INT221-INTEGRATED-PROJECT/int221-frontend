@@ -8,6 +8,7 @@ module.exports = {
 			},
 			fontFamily: {
 				dosis: ['"Dosis"', "sans-serif"],
+				playfairdisplay: ['"Playfair Display"', "serif"],
 			},
 		},
 	},
