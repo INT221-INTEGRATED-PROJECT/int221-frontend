@@ -11,11 +11,11 @@ body {
 	@apply text-white uppercase text-lg bg-deepBlue px-20 font-extralight;
 }
 .baseBrandBlock {
-	@apply bg-white rounded-lg h-44 w-40 border border-black grid grid-rows-4 text-2xl;
+	@apply bg-white rounded-lg h-44  w-40 border border-black grid grid-rows-4;
 }
 .baseBrandBlock:hover {
 	@apply bg-deepBlue text-white;
 }
 .baseBrandBlock h1 {
-	@apply font-semibold text-center;
+	@apply font-semibold text-center text-2xl;
 }

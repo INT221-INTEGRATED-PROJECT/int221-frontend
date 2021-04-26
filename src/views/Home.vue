@@ -6,14 +6,18 @@
 	<div class="bg-blue-400 h-60 px-14">
 		<div class="bg-red-400 h-44 "></div>
 	</div> -->
-	<!-- <div class="baseBrandBlock ">
-		<div class="row-span-3 pt-12 px-4">
-			<img src="@/assets/audi_logo.png" class="w-36" />
+	<div class="m-6   flex flex-row space-x-4 justify-center bg-blue-500">
+		<div v-for="b in brandCars" :key="b.brand" class="flex flex-row">
+			<div class="baseBrandBlock">
+				<div class="row-span-3   px-4">
+					<img :src="b.imgSrc" class="w-3/5" />
+				</div>
+				<h1>{{ b.brand }}</h1>
+			</div>
 		</div>
-		<h1>Audi</h1>
-	</div> -->
-	<!-- <p class="relative mt-9">{{ brandCarSorted }}</p> -->
-	<div></div>
+	</div>
+	<!-- <img src="@/assets/logo/audi_logo.png" />
+	<div></div> -->
 </template>
 
 <script>
@@ -23,14 +27,15 @@ export default {
 	name: "Home",
 	data() {
 		return {
+			// message: "Test",
 			brandCarSorted: "",
-			beandCar: [
-				{ brand: "Audi", img: "@/assets/audi_logo.png" },
-				{ brand: "Ferrari", img: "@/assets/ferrari_logo.png" },
-				{ brand: "Lamborgini", img: "@/assets/lanborgini_logo.png" },
-				{ brand: "Maserati", img: "@/assets/maserati_logo.png" },
-				{ brand: "Posrche", img: "@/assets/porsche_logo.png" },
-				{ brand: "Rolls Royce", img: "@/assets/rollsroyce_logo.png" },
+			brandCars: [
+				{ brand: "Audi", imgSrc: require("@/assets/logo/audi_logo.png") },
+				{ brand: "Ferrari", imgSrc: require("@/assets/logo/ferrari_logo.png") },
+				{ brand: "Lamborgini", imgSrc: require("@/assets/logo/lamborghini_logo.png") },
+				{ brand: "Maserati", imgSrc: require("@/assets/logo/maserati_logo.png") },
+				{ brand: "Posrche", imgSrc: require("@/assets/logo/porsche_logo.png") },
+				{ brand: "Rolls Royce", imgSrc: require("@/assets/logo/rollsroyce_logo.png") },
 			],
 		};
 	},
