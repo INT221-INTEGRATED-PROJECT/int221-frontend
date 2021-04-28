@@ -12,13 +12,11 @@
 			</svg>
 		</div>
 		<input id="search" type="text" class="px-4 border border-deepBlue border-l-0 w-auto focus:outline-none" />
-		<button
-			id="search-button"
-			class="w-24 justify justify-self-start h-auto text-deepBlue border border-deepBlue border-l-0 rounded-md rounded-l-none focus:outline-none"
-		>
+		<button id="search-button" class="searchButton">
 			Search
 		</button>
 	</div>
+	<BrandBlock></BrandBlock>
 	<div class="border border-greyc rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
 		<!-- <div class="grid grid-rows-2 space-y-4 justify mt-20 ml-10 w-40"> -->
 		<!-- <div class="w-36 ml-10 mt-20 clear-right"> 
@@ -32,3 +30,11 @@
 		<div></div>
 	</div>
 </template>
+<script>
+import BrandBlock from "@/components/BrandBlock.vue";
+export default {
+	components: {
+		BrandBlock,
+	},
+};
+</script>
