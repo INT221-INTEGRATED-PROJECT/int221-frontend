@@ -5,6 +5,7 @@ module.exports = {
 		extend: {
 			colors: {
 				deepBlue: "#13315C",
+				skyBlue: "#134074",
 			},
 			fontFamily: {
 				dosis: ['"Dosis"', "sans-serif"],
