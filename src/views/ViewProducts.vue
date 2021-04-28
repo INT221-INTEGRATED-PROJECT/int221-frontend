@@ -1,7 +1,7 @@
 <template>
-	<div id="headBar" class="grid grid-flow-col justify justify-self-center mt-5">
-		<a href="#home" class="headerbar justify justify-self-end mr-auto">View Products</a>
-		<a href="#news" class="headerbar">Add Product</a>
+	<div id="headBar" class="grid grid-flow-col justify justify-self-center mt-24 mb-10  ">
+		<a href="#home" class="headerbar justify justify-self-end mr-auto  ">View Products</a>
+		<a href="#news" class="headerbar ">Add Product</a>
 	</div>
 	<div id="searchBar" class="grid grid-flow-col justify justify-self-center w-full mt-5">
 		<div class="justify justify-self-end border border-deepBlue border-r-0 px-2 py-2 rounded-md rounded-r-none">
@@ -16,6 +16,7 @@
 			Search
 		</button>
 	</div>
+	<span class="text-xl ">Sort by :</span>
 	<BrandBlock></BrandBlock>
 	<div class="border border-greyc rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
 		<!-- <div class="grid grid-rows-2 space-y-4 justify mt-20 ml-10 w-40"> -->
