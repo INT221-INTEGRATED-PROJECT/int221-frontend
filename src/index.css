@@ -10,3 +10,12 @@ body {
 .navbar {
 	@apply text-white uppercase text-lg bg-deepBlue px-20;
 }
+.teamblock {
+	@apply container w-11/12 p-8 mx-auto mt-10 rounded-lg grid grid-cols-3 gap-x-10;
+}
+.memberblock {
+	@apply border border-gray-600 grid rounded bg-skyBlue;
+}
+.teamimage {
+	@apply w-40 m-auto mt-6 mb-6;
+}

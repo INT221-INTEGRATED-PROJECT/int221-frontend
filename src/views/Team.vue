@@ -1,5 +1,16 @@
 <template>
-	<div class="about">
-		<h1>This is an team page</h1>
+	<div>
+		<TeamBlock></TeamBlock>
 	</div>
 </template>
+
+<script>
+import TeamBlock from '@/components/TeamBlock.vue';
+
+export default {
+	name: 'Team',
+	components:{
+		TeamBlock,
+	}
+}
+</script>
