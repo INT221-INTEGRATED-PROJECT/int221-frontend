@@ -12,6 +12,7 @@ module.exports = {
 				orangec: "#FA6E09",
 				yellowc: "#FFDB21",
 				greyBorderc: "#6E6B6B",
+				skyBlue: "#134074",
 			},
 			fontFamily: {
 				dosis: ['"Dosis"', "sans-serif"],
