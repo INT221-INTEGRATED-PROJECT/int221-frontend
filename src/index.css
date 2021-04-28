@@ -13,6 +13,3 @@ body {
 .headerbar {
 	@apply h-10 w-2/12 text-deepBlue block border-0 border-deepBlue border-b-2 border-opacity-0 text-center mx-10 text-lg hover:border-deepBlue focus:border-deepBlue
 }
-.sortbybutton {
-	@apply border border-greyc rounded-md w-44 h-48 ml-auto mr-auto focus:outline-none hover:bg-deepBlue hover:text-white
-}
