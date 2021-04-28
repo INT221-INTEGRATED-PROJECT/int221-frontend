@@ -11,7 +11,7 @@ module.exports = {
 				greyc: "#848484",
 				orangec: "#FA6E09",
 				yellowc: "#FFDB21",
-				greyBorderc: "#6E6B6B"
+				greyBorderc: "#6E6B6B",
 			},
 			fontFamily: {
 				dosis: ['"Dosis"', "sans-serif"],
@@ -21,8 +21,8 @@ module.exports = {
 	},
 	variants: {
 		extend: {
-			backgroundColor: ['checked'],
-      		borderColor: ['checked'],
+			backgroundColor: ["checked"],
+			borderColor: ["checked"],
 		},
 	},
 	plugins: [],
