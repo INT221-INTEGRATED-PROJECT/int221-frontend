@@ -1,4 +1,4 @@
-<template>
+	<template>
 	<!-- <div class="h-auto">
 		<img src="../assets/car1.jpg" class="w-screen bg-center bg-cover " />
 		<img src="../assets/car2.jpg" class="w-screen bg-center bg-cover " />
@@ -13,7 +13,6 @@
 
 <script>
 // @ is an alias to /src
-
 export default {
 	name: "Home",
 };
