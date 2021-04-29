@@ -5,6 +5,14 @@ module.exports = {
 		extend: {
 			colors: {
 				deepBlue: "#13315C",
+				redc: "#C62121",
+				bluec: "#003DBB",
+				greenc: "#32612D",
+				greyc: "#848484",
+				orangec: "#FA6E09",
+				yellowc: "#FFDB21",
+				greyBorderc: "#6E6B6B",
+				skyBlue: "#134074",
 			},
 			fontFamily: {
 				dosis: ['"Dosis"', "sans-serif"],
@@ -13,7 +21,10 @@ module.exports = {
 		},
 	},
 	variants: {
-		extend: {},
+		extend: {
+			backgroundColor: ["checked"],
+			borderColor: ["checked"],
+		},
 	},
 	plugins: [],
 };
