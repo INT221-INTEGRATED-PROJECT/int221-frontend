@@ -1,5 +1,5 @@
 <template>
-	<div class="grid grid-flow-col border border-gray-600 rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
+	<div class="grid grid-flow-col border border-greyBorderc rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
 		<div class="space-y-4 my-10 ml-auto mr-auto w-40">
 			<div class="w-36 ml-10 mt-20 clear-right">
 				<button
@@ -30,10 +30,12 @@
 			<div class="inline-flex items-center space-x-6  ml-auto mr-auto mb-48">
 				<div class="border border-gray-600 bg-black rounded-full w-6 h-6"></div>
 				<div class="border border-gray-600 bg-white rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-red-700 rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-yellow-400 rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-green-500 rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-blue-700 rounded-full w-6 h-6"></div>
+				<div class="border border-gray-600 bg-redc rounded-full w-6 h-6"></div>
+				<div class="border border-gray-600 bg-orangec rounded-full w-6 h-6"></div>
+				<div class="border border-gray-600 bg-yellowc rounded-full w-6 h-6"></div>
+				<div class="border border-gray-600 bg-greenc rounded-full w-6 h-6"></div>
+				<div class="border border-gray-600 bg-bluec rounded-full w-6 h-6"></div>
+				<div class="border border-gray-600 bg-greyc rounded-full w-6 h-6"></div>
 			</div>
 		</div>
 	</div>
