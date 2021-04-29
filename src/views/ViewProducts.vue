@@ -1,8 +1,9 @@
 <template>
-	<div id="headBar" class="grid grid-flow-col justify justify-self-center mt-24 mb-10  ">
+	<!-- <div id="headBar" class="grid grid-flow-col justify justify-self-center mt-24 mb-10  ">
 		<a href="#home" class="headerbar justify justify-self-end mr-auto  ">View Products</a>
 		<a href="#news" class="headerbar ">Add Product</a>
-	</div>
+	</div> -->
+	<HeadBar></HeadBar>
 	<div id="searchBar" class="grid grid-flow-col justify justify-self-center w-full mt-5">
 		<div class="justify justify-self-end border border-deepBlue border-r-0 px-2 py-2 rounded-md rounded-r-none">
 			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#13315C">
@@ -18,24 +19,28 @@
 	</div>
 	<span class="text-xl ">Sort by :</span>
 	<BrandBlock></BrandBlock>
-	<div class="border border-greyc rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
-		<!-- <div class="grid grid-rows-2 space-y-4 justify mt-20 ml-10 w-40"> -->
-		<!-- <div class="w-36 ml-10 mt-20 clear-right"> 
+	<!-- <div class="border border-greyc rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
+		<div class="grid grid-rows-2 space-y-4 justify mt-20 ml-10 w-40">
+		<div class="w-36 ml-10 mt-20 clear-right"> 
 				<button class="text-deepBlue bg-white px-3 py-1 mt-1 border border-deepBlue w-36 h-14 font-medium text-xl rounded-md">Edit</button>
 			</div>
             <div class="w-36 ml-10 clear-right">
 				<button class="text-white bg-deepBlue px-3 py-1 mt-1 w-36 h-14 font-medium text-xl rounded-md">Delete</button>
-			</div> -->
-		<!-- </div> -->
+			</div>
+		</div>
 		<img class="w-2/4 ml-auto mr-10 mt-10" src="../assets/Ferrari-812-Superfast.png" />
-		<div></div>
-	</div>
+	</div> -->
+	<ProductBlock></ProductBlock>
 </template>
 <script>
 import BrandBlock from "@/components/BrandBlock.vue";
+import HeadBar from "@/components/HeadBar.vue";
+import ProductBlock from "@/components/ProductBlock.vue";
 export default {
 	components: {
 		BrandBlock,
+		HeadBar,
+		ProductBlock,
 	},
 };
 </script>
