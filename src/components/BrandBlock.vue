@@ -1,5 +1,6 @@
 <template>
 	<!-- <h1>This is brandblock component</h1> -->
+
 	<div class="m-6 py-5  flex flex-row space-x-4 justify-center h-auto ">
 		<div v-for="b in brandCars" :key="b.brand" class="flex flex-row">
 			<div class="baseBrandBlock ">

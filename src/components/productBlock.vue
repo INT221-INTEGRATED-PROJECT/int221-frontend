@@ -4,26 +4,32 @@
 			<div class="w-36 ml-10 mt-20 clear-right">
 				<button
 					class="text-deepBlue bg-white px-3 py-1 mt-1 border border-deepBlue w-28 h-14 font-medium text-lg rounded-md"
+					@click="editButtonClick"
 				>
 					Edit
 				</button>
 			</div>
 			<div class="w-36 ml-10 clear-right">
-				<button class="text-white bg-deepBlue px-3 py-1 mt-1 w-28 h-14 font-medium text-lg rounded-md">Delete</button>
+				<button
+					class="text-white bg-deepBlue px-3 py-1 mt-1 w-28 h-14 font-medium text-lg rounded-md"
+					@click="deleteButtonClick"
+				>
+					Delete
+				</button>
 			</div>
 		</div>
 		<div class="font-medium text-xl text-deepBlue mt-10 mb-auto ml-16">
-			<p class="text-center">911 CARRENA S &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PORSCHE</p>
+			<p class="text-center">
+				name: {{ productName }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brand : {{ productBrand }}
+			</p>
 			<p>Description :</p>
-			<span class="font-normal">
-				331 kW/450 PS Power (kW)/Power (PS) 3.7 s <br />Acceleration 0 - 100 km/h 308 km/hTop speed
-			</span>
+			<span class="font-normal"> {{ productDescription }} <br />Acceleration 0 - 100 km/h 308 km/hTop speed </span>
 			<p>Manufacturer Date :</p>
-			<span class="font-normal">25/12/2012</span>
+			<span class="font-normal">{{ releaseDate }}</span>
 			<p>Price :</p>
-			<span class="font-normal">$ 405921.75</span>
+			<span class="font-normal">{{ productPrice }}</span>
 			<p>Warranty :</p>
-			<span class="font-normal">2 y</span>
+			<span class="font-normal"> {{ warrantyYear }}</span>
 		</div>
 		<div class="grid grid-rows-2 grid-flow-row">
 			<img class="w-4/5 ml-auto mr-auto mt-20" src="../assets/Ferrari-812-Superfast.png" />
@@ -43,5 +49,16 @@
 <script>
 export default {
 	name: "ProductBlock",
+	// "productImg","productColor"
+	emits: ["edit-click", "delete-click"],
+	props: ["productName", "productBrand", "releaseDate", "productPrice", "warrantyYear", "productDescription"],
+	methods: {
+		deleteButtonClick() {
+			this.$emit("delete-click", true);
+		},
+		editButtonClick() {
+			this.$emit("edit-click", true);
+		},
+	},
 };
 </script>
