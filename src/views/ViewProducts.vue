@@ -1,8 +1,4 @@
 <template>
-	<!-- <div id="headBar" class="grid grid-flow-col justify justify-self-center mt-24 mb-10  ">
-		<a href="#home" class="headerbar justify justify-self-end mr-auto  ">View Products</a>
-		<a href="#news" class="headerbar ">Add Product</a>
-	</div> -->
 	<HeadBar></HeadBar>
 	<div id="searchBar" class="grid grid-flow-col justify justify-self-center w-full mt-5">
 		<div class="justify justify-self-end border border-deepBlue border-r-0 px-2 py-2 rounded-md rounded-r-none">
@@ -16,23 +12,19 @@
 		<button id="search-button" class="searchButton">
 			Search
 		</button>
+		<h1>Test</h1>
 	</div>
-	<span class="text-xl ">Sort by :</span>
-	<BrandBlock></BrandBlock>
-	<!-- <div class="border border-greyc rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
-		<div class="grid grid-rows-2 space-y-4 justify mt-20 ml-10 w-40">
-		<div class="w-36 ml-10 mt-20 clear-right"> 
-				<button class="text-deepBlue bg-white px-3 py-1 mt-1 border border-deepBlue w-36 h-14 font-medium text-xl rounded-md">Edit</button>
-			</div>
-            <div class="w-36 ml-10 clear-right">
-				<button class="text-white bg-deepBlue px-3 py-1 mt-1 w-36 h-14 font-medium text-xl rounded-md">Delete</button>
-			</div>
-		</div>
-		<img class="w-2/4 ml-auto mr-10 mt-10" src="../assets/Ferrari-812-Superfast.png" />
+	<!-- <div class="bg-orangec mr-auto ml-auto h-12 mt-7  grid grid-rows-2">
+		<div class="bg-skyBlue"></div>
 	</div> -->
-	<ProductBlock></ProductBlock>
+
+	<BrandBlock></BrandBlock>
+	<div class="h-screen w-3/4 bg-yellow-500 ml-auto mr-auto ">
+		<ProductBlock></ProductBlock>
+	</div>
 </template>
 <script>
+// props: ["name", "brand", "date", "price", "warranty", "description"],
 import BrandBlock from "@/components/BrandBlock.vue";
 import HeadBar from "@/components/HeadBar.vue";
 import ProductBlock from "@/components/ProductBlock.vue";
