@@ -19,6 +19,7 @@ export default {
 	name: "BrandBlock",
 	data() {
 		return {
+			// brandUrl: "http://localhost:3000/brand",
 			brandCarSorted: "",
 			brandCars: [
 				{ brand: "Audi", imgSrc: require("@/assets/logo/audi_logo.png") },
@@ -30,5 +31,12 @@ export default {
 			],
 		};
 	},
+	// methods: {
+	// 	async fetchBrand() {
+	// 		const res = await fetch(this.brandUrl);
+	// 		const data = await res.json();
+	// 		return data;
+	// 	},
+	// },
 };
 </script>

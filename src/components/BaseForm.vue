@@ -41,14 +41,14 @@
 						<label>Price</label>
 						<input type="text" id="price" placeholder="USD $ " class="px-4 py-4  rounded-md" v-model="productPrice" />
 					</div>
-					<div id="warranty" class="formAlignment">
+					<div class="formAlignment">
 						<label>Warranty</label>
-						<select id="warranty" class="px-4 py-4  rounded border border-skyBlue " v-model="warrantyYear">
-							<option value="1">1 </option>
-							<option value="2">2 </option>
-							<option value="3">3 </option>
-							<option value="4">4 </option>
-							<option value="5">5 </option>
+						<select id="warranty" class="px-4 py-4  rounded border border-skyBlue" v-model="productWarranty">
+							<option> 1 </option>
+							<option> 2 </option>
+							<option> 3 </option>
+							<option> 4 </option>
+							<option> 5 </option>
 						</select>
 					</div>
 				</div>
@@ -62,23 +62,20 @@
 						v-model="productDescription"
 					/>
 				</div>
-				<!--	<div class="mb-5">
+				<div class="mb-5">
 					<label class="mr-5">Colors </label>
-					<input type="checkbox" id="yellow" name="yellow" value="yellow" v-model="productColor" />
-					<span class="colorSpan bg-yellowc" />
-					<input type="checkbox" id="red" name="red" value="red" v-model="productColor" />
-					<span class="colorSpan bg-redc" />
-					<input type="checkbox" id="blue" name="blue" value="blue" v-model="productColor" />
-					<span class=" colorSpan bg-bluec" />
-					<input type="checkbox" id="green" name="green" value="green" v-model="productColor" />
-					<span class=" colorSpan bg-greenc" />
-					<input type="checkbox" id="black" name="black" value="black" v-model="productColor" />
-					<span class=" colorSpan bg-black" />
-					<input type="checkbox" id="white" name="white" value="white" v-model="productColor" />
-					<span class=" colorSpan bg-white border-black" />
-				</div> -->
+					<span v-for="c in colorsArray" v-bind:key="c.id" class="flex-row">
+						<input type="checkbox" v-model="productColor.colorCollection" :id="c.name" :value="c.value" />
+						<span class="colorSpan" :class="c.value" />
+					</span>
+					<div>
+						{{ productColor.colorCollection }}, {{ productName }},{{ productBrand }},{{ releaseDate }},{{
+							productPrice
+						}},{{ productWarranty }},{{ productDescription }}
+					</div>
+				</div>
 				<label>Upload Image </label>
-				<!-- <input id="file-input" type="file" class="border border-white" @change="uploadImage" /> -->
+				<input id="file-input" type="file" class="border border-white" @change="uploadImage" />
 				<div>
 					<base-button
 						textColor="text-deepBlue"
@@ -92,7 +89,7 @@
 						buttonLabel="SAVE"
 						buttonColor="bg-deepBlue"
 						class="float-right"
-						@clock="closeCurrentForm"
+						@click="closeCurrentForm"
 					></base-button>
 				</div>
 			</div>
@@ -114,32 +111,64 @@ const constraints = {
 	},
 	productPrice: {
 		presenece: true,
+		numericality: {
+			greaterThanOrEqualTo: 0,
+		},
 	},
-	warrantyYear: {
-		presence: true,
+	productWarranty: {
+		presenece: true,
 	},
 	productDescription: {
 		presence: true,
 	},
-	// productColor:{
-	// 	presence:true
-	// }
+	productColor: {
+		presence: true,
+	},
 };
 export default {
 	name: "BaseForm",
 	// "color","carImgFromDb"
-	props: ["name", "brand", "date", "price", "warranty", "description"],
-	emits: ["close", "save-product"],
+	props: ["name", "brand", "date", "price", "warranty", "description", "colors", "carImgFromDb"],
+	emits: ["close", "save-product", "save-product-color"],
 	data() {
 		return {
 			// productImg:this.carImgFromDb ? this.carImgFromDb : productImg,
+			colorsArray: [
+				{
+					name: "yellow",
+					value: "bg-yellowc",
+				},
+				{
+					name: "red",
+					value: "bg-redc",
+				},
+				{
+					name: "blue",
+					value: "bg-bluec",
+				},
+				{
+					name: "green",
+					value: "bg-greenc",
+				},
+				{
+					name: "black",
+					value: "bg-black",
+				},
+				{
+					name: "white",
+					value: "bg-white",
+				},
+			],
 			productName: this.name,
 			productBrand: this.brand,
 			releaseDate: this.date,
 			productPrice: this.price,
-			warrantyYear: this.warranty,
+			productWarranty: this.warranty,
 			productDescription: this.description,
-			// productColor:this.color,
+			// productImg: this.carImgFromDb ? this.carImgFromDb : productImg,
+			productColor: {
+				colorCollection: [],
+			},
 			errors: null,
 		};
 	},
@@ -147,14 +176,14 @@ export default {
 		closeCurrentForm() {
 			this.$emit("close", true);
 		},
-		// uploadImage(e){
-		// 	const file = e.target.files[0] || e.dataTransfer.files[0];
-		// 	const reader = new FileReader();
-		//  	reader.onload = (e) => {
-		// 		this.carImg = e.target.result;
-		// 	};
-		// 	reader.readAsDataURL(file);
-		// },
+		uploadImage(e) {
+			const file = e.target.files[0] || e.dataTransfer.files[0];
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				this.productImg = e.target.result;
+			};
+			reader.readAsDataURL(file);
+		},
 		checkForm() {
 			var validate = require("validate.js");
 			this.errors = validate(
@@ -165,7 +194,7 @@ export default {
 					productPrice: this.productPrice,
 					warrantyYear: this.warrantyYear,
 					productDescription: this.productDescription,
-					// productColor:this.productColor,
+					productColor: { productColor: [] },
 				},
 				constraints
 			);
@@ -174,6 +203,9 @@ export default {
 			} else {
 				this.saveProductInfo();
 				this.closeCurrentForm();
+				this.saveProductColorsInfo();
+				// alert(this.productColor);
+				// console.log(this.productColor);
 			}
 		},
 		saveProductInfo() {
@@ -182,11 +214,17 @@ export default {
 				brand: this.productBrand,
 				date: this.releaseDate,
 				price: this.productPrice,
-				warranty: this.warrantyYear,
+				warranty: this.productWarranty,
 				description: this.productDescription,
-				// imgSrc:this.productImg
+				imgSrc: this.productImg,
 			};
 			this.$emit("save-product", product);
+		},
+		saveProductColorsInfo() {
+			let productColor = {
+				colors: { productColor: [] },
+			};
+			this.$emit("save-product-color", productColor);
 		},
 	},
 };
