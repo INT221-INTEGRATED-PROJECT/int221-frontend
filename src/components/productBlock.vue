@@ -29,7 +29,7 @@
 			<p>Price :</p>
 			<span class="font-normal">{{ productPrice }}</span>
 			<p>Warranty :</p>
-			<span class="font-normal"> {{ warrantyYear }}</span>
+			<span class="font-normal"> {{ productWarranty }}</span>
 		</div>
 		<div class="grid grid-rows-2 grid-flow-row">
 			<img class="w-4/5 ml-auto mr-auto mt-20" src="../assets/Ferrari-812-Superfast.png" />
@@ -51,7 +51,7 @@ export default {
 	name: "ProductBlock",
 	// "productImg","productColor"
 	emits: ["edit-click", "delete-click"],
-	props: ["productName", "productBrand", "releaseDate", "productPrice", "warrantyYear", "productDescription"],
+	props: ["productName", "productBrand", "releaseDate", "productPrice", "productWarranty", "productDescription"],
 	methods: {
 		deleteButtonClick() {
 			this.$emit("delete-click", true);
