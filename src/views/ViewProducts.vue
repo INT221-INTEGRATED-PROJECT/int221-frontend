@@ -8,19 +8,44 @@
 				/>
 			</svg>
 		</div>
-		<input id="search" type="text" class="px-4 border border-deepBlue border-l-0 w-auto focus:outline-none" />
+		<input
+			id="search"
+			type="text"
+			class="px-4 border border-deepBlue border-l-0 w-auto focus:outline-none"
+			v-model="inputSearch"
+		/>
 		<button id="search-button" class="searchButton">
 			Search
 		</button>
-		<h1>Test</h1>
 	</div>
 	<!-- <div class="bg-orangec mr-auto ml-auto h-12 mt-7  grid grid-rows-2">
 		<div class="bg-skyBlue"></div>
 	</div> -->
-
+	<div class="bg-gray-800 h-3/5 w-3/4 ml-auto mr-auto overflow-auto" v-if="editClicked">
+		<BaseForm
+			@close="changeEditItemClicked"
+			:name="currentProduct.name"
+			:brand="currentproduct.brand"
+			:date="currentProduct.date"
+			:price="currentProduct.price"
+			:warranty="currentProduct.warranty"
+			:description="currentProduct.description"
+			@save-product="editProduct"
+		/>
+	</div>
 	<BrandBlock></BrandBlock>
-	<div class="h-screen w-3/4 bg-yellow-500 ml-auto mr-auto ">
-		<ProductBlock></ProductBlock>
+	<div class="h-screen w-full ml-auto mr-auto " v-for="p in products" :key="p.id">
+		<ProductBlock
+			:productName="p.name"
+			:productBrand="p.brand"
+			:releaseDate="p.date"
+			:productPrice="p.price"
+			:productWarranty="p.warranty"
+			:productDescription="p.description"
+			@click="selectedCar(p)"
+			@delete-click="deleteCar(p.id)"
+			@edit-click="openForm"
+		/>
 	</div>
 </template>
 <script>
@@ -28,11 +53,102 @@
 import BrandBlock from "@/components/BrandBlock.vue";
 import HeadBar from "@/components/HeadBar.vue";
 import ProductBlock from "@/components/ProductBlock.vue";
+// import BaseForm from "@/components/BaseForm.vue";
 export default {
 	components: {
 		BrandBlock,
 		HeadBar,
 		ProductBlock,
+		// BaseForm,
+	},
+	data() {
+		return {
+			url: "http://localhost:3000/products",
+			products: [],
+			inputSearch: "",
+			currentProduct: [],
+			editClicked: false,
+		};
+	},
+	methods: {
+		changeEditItemClicked(value) {
+			this.editClicked = !value;
+		},
+		async fetchProduct() {
+			const res = await fetch(this.url);
+			const data = await res.json();
+			return data;
+		},
+		selectedProducts(products) {
+			this.currentProduct = products;
+		},
+		async deleteMenu(id) {
+			const res = await fetch(`${this.url}/${id}`, {
+				method: "DELETE",
+			});
+			res.status === 200
+				? (this.products = this.products.filter((p) => p.id !== id))
+				: alert("Error to delete product");
+			this.currentProduct = this.products[this.products.length - 1];
+		},
+		openForm(value) {
+			this.editClicked = value;
+		},
+		async editProduct(editingProduct) {
+			const res = await fetch(`${this.url}/${this.currentProduct.id}`, {
+				method: "PUT",
+				headers: {
+					"Content-type": "application/json",
+				},
+				body: JSON.stringify({
+					name: editingProduct.name,
+					brand: editingProduct.brand,
+					date: editingProduct.date,
+					price: editingProduct.price,
+					warranty: editingProduct.warranty,
+					description: editingProduct.description,
+				}),
+			});
+			const data = await res.json();
+			this.products = this.products.map(
+				(p) =>
+					p.id === data.id // eslint-disable-line no-mixed-spaces-and-tabs
+						? {
+								// eslint-disable-line no-mixed-spaces-and-tabs
+								...p, // eslint-disable-line no-mixed-spaces-and-tabs
+								name: data.name, // eslint-disable-line no-mixed-spaces-and-tabs
+								brand: data.brand, // eslint-disable-line no-mixed-spaces-and-tabs
+								date: data.date, // eslint-disable-line no-mixed-spaces-and-tabs
+								price: data.price, // eslint-disable-line no-mixed-spaces-and-tabs
+								warranty: data.warranty, // eslint-disable-line no-mixed-spaces-and-tabs
+								description: data.description, // eslint-disable-line no-mixed-spaces-and-tabs
+						  } // eslint-disable-line no-mixed-spaces-and-tabs
+						: p // eslint-disable-line no-mixed-spaces-and-tabs
+			); // eslint-disable-line no-mixed-spaces-and-tabs
+			this.currentProduct.name = editingProduct.name;
+			this.currentProduct.brand = editingProduct.brand;
+			this.currentProduct.date = editingProduct.date;
+			this.currentProduct.price = editingProduct.price;
+			this.currentProduct.warrnty = editingProduct.warranty;
+			this.currentProduct.description = editingProduct.description;
+		},
+	},
+	computed: {
+		searchProduct() {
+			if (this.inputSearch == "") {
+				return this.products.slice().reverse();
+			} else {
+				let result = this.products.filter((n) => n.name.toLowerCase().includes(this.inputSearch.toLowerCase()));
+				if (result == "") {
+					return;
+				}
+				return result;
+			}
+		},
+	},
+	async created() {
+		this.products = await this.fetchProduct();
+		this.currentProduct = await this.products[0];
 	},
 };
 </script>
