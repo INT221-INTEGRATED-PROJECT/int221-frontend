@@ -53,13 +53,13 @@
 import BrandBlock from "@/components/BrandBlock.vue";
 import HeadBar from "@/components/HeadBar.vue";
 import ProductBlock from "@/components/ProductBlock.vue";
-// import BaseForm from "@/components/BaseForm.vue";
+import BaseForm from "@/components/BaseForm.vue";
 export default {
 	components: {
 		BrandBlock,
 		HeadBar,
 		ProductBlock,
-		// BaseForm,
+		BaseForm,
 	},
 	data() {
 		return {
