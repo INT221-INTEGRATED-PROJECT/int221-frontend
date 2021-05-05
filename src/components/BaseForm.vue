@@ -92,32 +92,32 @@
 
 <script>
 // @ is an alias to /src
-const constraints = {
-	productName: {
-		presence: true,
-	},
-	productBrand: {
-		presenece: true,
-	},
-	releaseDate: {
-		presenece: true,
-	},
-	productPrice: {
-		presenece: true,
-		numericality: {
-			greaterThanOrEqualTo: 0,
-		},
-	},
-	productWarranty: {
-		presenece: true,
-	},
-	productDescription: {
-		presence: true,
-	},
-	// productColor: {
-	// 	presence: true,
-	// },
-};
+// const constraints = {
+// 	productName: {
+// 		presence: true,
+// 	},
+// 	productBrand: {
+// 		presenece: true,
+// 	},
+// 	releaseDate: {
+// 		presenece: true,
+// 	},
+// 	productPrice: {
+// 		presenece: true,
+// 		numericality: {
+// 			greaterThanOrEqualTo: 0,
+// 		},
+// 	},
+// 	warrantyYear: {
+// 		presenece: true,
+// 	},
+// 	productDescription: {
+// 		presence: true,
+// 	},
+// 	// productColor: {
+// 	// 	presence: true,
+// 	// },
+// };
 export default {
 	name: "BaseForm",
 	// "color","carImgFromDb"
@@ -182,20 +182,20 @@ export default {
 		// 	reader.readAsDataURL(file);
 		// },
 		checkForm() {
-			var validate = require("validate.js");
-			this.errors = validate(
-				{
-					productName: this.productName,
-					productBrand: this.productBrand,
-					releaseDate: this.releaseDate,
-					productPrice: this.productPrice,
-					warrantyYear: this.warrantyYear,
-					productDescription: this.productDescription,
-					// productColor: { productColor: [] },
-					productColor: this.productColor,
-				},
-				constraints
-			);
+			// var validate = require("validate.js");
+			// this.errors = validate(
+			// 	{
+			// 		productName: this.productName,
+			// 		productBrand: this.productBrand,
+			// 		releaseDate: this.releaseDate,
+			// 		productPrice: this.productPrice,
+			// 		warrantyYear: this.warrantyYear,
+			// 		productDescription: this.productDescription,
+			// 		// productColor: { productColor: [] },
+			// 		productColor: this.productColor,
+			// 	},
+			// 	constraints
+			// );
 			if (this.errors) {
 				console.log(this.errors);
 			} else {
@@ -212,7 +212,7 @@ export default {
 				brand: this.productBrand,
 				date: this.releaseDate,
 				price: this.productPrice,
-				warranty: this.productWarranty,
+				warranty: this.warrantyYear,
 				description: this.productDescription,
 				colors: this.productColor,
 				// imgSrc: this.productImg,
