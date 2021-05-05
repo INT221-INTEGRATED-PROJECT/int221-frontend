@@ -2,82 +2,13 @@
 	"products": [
 		{
 			"id": 1000,
-			"name": "Audi S7 4G ",
+			"name": "Audi S7 5G ",
 			"brand": "Audi",
 			"date": "12/25/2017",
 			"price": 88000,
 			"warranty": 5,
 			"description": "Acceleration 0-100 km/h: 4.7 seconds Horsepower: 414 hp Max speed: 250 km/h Engine: 4L V8 Bi-Turbo",
-			"imgSrc": null
-		}
-	],
-	"productcolors": [
-		{
-			"id": 1000,
-			"colorCode": 11
-		},
-		{
-			"id": 1000,
-			"colorCode": 12
-		}
-	],
-	"colors": [
-		{
-			"colorCode": 11,
-			"hexCode": "#000000"
-		},
-		{
-			"colorCode": 12,
-			"hexCode": "#FFFFFF"
-		},
-		{
-			"colorCode": 13,
-			"hexCode": "#C62121"
-		},
-		{
-			"colorCode": 14,
-			"hexCode": "#003DBB"
-		},
-		{
-			"colorCode": 15,
-			"hexCode": "32612D"
-		},
-		{
-			"colorCode": 16,
-			"hexcode": "#FFDB21"
-		}
-	],
-	"brand": [
-		{
-			"brandId": 100,
-			"brandName": "Audi",
-			"brandLogo": "@/assets/logo/audi_logo.png"
-		},
-		{
-			"brandId": 200,
-			"brandName": "Ferrari",
-			"brandLogo": "@/assets/logo/ferrari_logo_logo.png"
-		},
-
-		{
-			"brandId": 300,
-			"brandName": "Lamborghini",
-			"brandLogo": "@/assets/logo/lamborghini_logo.png"
-		},
-		{
-			"brandId": 400,
-			"brandName": "Maserati",
-			"brandLogo": "@/assets/logo/maserati_logo.png"
-		},
-		{
-			"brandId": 500,
-			"brandName": "Porshe",
-			"brandLogo": "@/assets/logo/porsche_logo.png"
-		},
-		{
-			"brandId": 600,
-			"brandName": "Rolls Royce",
-			"brandLogo": "@/assets/logo/rollsroyce_logo.png"
+			"colors": ["yellow", "red"]
 		}
 	]
 }

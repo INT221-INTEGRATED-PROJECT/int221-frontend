@@ -21,20 +21,9 @@
 	<!-- <div class="bg-orangec mr-auto ml-auto h-12 mt-7  grid grid-rows-2">
 		<div class="bg-skyBlue"></div>
 	</div> -->
-	<div class="bg-gray-800 h-3/5 w-3/4 ml-auto mr-auto overflow-auto" v-if="editClicked">
-		<BaseForm
-			@close="changeEditItemClicked"
-			:name="currentProduct.name"
-			:brand="currentproduct.brand"
-			:date="currentProduct.date"
-			:price="currentProduct.price"
-			:warranty="currentProduct.warranty"
-			:description="currentProduct.description"
-			@save-product="editProduct"
-		/>
-	</div>
+
 	<BrandBlock></BrandBlock>
-	<div class="h-screen w-full ml-auto mr-auto " v-for="p in products" :key="p.id">
+	<div class=" w-full ml-auto mr-auto  mb-10" v-for="p in products" :key="p.id">
 		<ProductBlock
 			:productName="p.name"
 			:productBrand="p.brand"
@@ -42,9 +31,23 @@
 			:productPrice="p.price"
 			:productWarranty="p.warranty"
 			:productDescription="p.description"
-			@click="selectedCar(p)"
-			@delete-click="deleteCar(p.id)"
+			@click="selectedProducts(p)"
+			@delete-click="deleteProduct(p.id)"
 			@edit-click="openForm"
+		/>
+	</div>
+	<div class="bg-black inset-x-10 h-auto top-10 absolute z-0" v-if="editClicked">
+		<BaseForm
+			v-if="editClicked"
+			@close="changeEditItemClicked"
+			:name="currentProduct.name"
+			:brand="currentProduct.brand"
+			:date="currentProduct.date"
+			:price="currentProduct.price"
+			:warranty="currentProduct.warranty"
+			:description="currentProduct.description"
+			@save-product="editProduct"
+			class="border-black border bg-white"
 		/>
 	</div>
 </template>
@@ -73,6 +76,7 @@ export default {
 	methods: {
 		changeEditItemClicked(value) {
 			this.editClicked = !value;
+			// alert(`changeEditItemClicked ${this.editClicked}`);
 		},
 		async fetchProduct() {
 			const res = await fetch(this.url);
@@ -82,7 +86,7 @@ export default {
 		selectedProducts(products) {
 			this.currentProduct = products;
 		},
-		async deleteMenu(id) {
+		async deleteProduct(id) {
 			const res = await fetch(`${this.url}/${id}`, {
 				method: "DELETE",
 			});
@@ -93,6 +97,7 @@ export default {
 		},
 		openForm(value) {
 			this.editClicked = value;
+			// alert(this.editClicked);
 		},
 		async editProduct(editingProduct) {
 			const res = await fetch(`${this.url}/${this.currentProduct.id}`, {
@@ -107,6 +112,7 @@ export default {
 					price: editingProduct.price,
 					warranty: editingProduct.warranty,
 					description: editingProduct.description,
+					colors: editingProduct.colors,
 				}),
 			});
 			const data = await res.json();
