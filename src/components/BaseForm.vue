@@ -1,6 +1,6 @@
 <template>
 	<div class="mr-auto ml-auto  h-screen w-3/4">
-		<form @submit-prevent="checkForm">
+		<form @submit.prevent="checkForm">
 			<div class="container w-4/5 p-8 mx-auto mt-10 rounded-lg">
 				<div class="grid grid-cols-2 gap-4">
 					<div class="formAlignment">
@@ -44,7 +44,7 @@
 					</div>
 					<div class="formAlignment">
 						<label>Warranty</label>
-						<select id="warranty" class="px-4 py-4  rounded border border-skyBlue" v-model="productWarranty">
+						<select id="warranty" class="px-4 py-4  rounded border border-skyBlue" v-model="warrantyYear">
 							<option> 1 </option>
 							<option> 2 </option>
 							<option> 3 </option>
@@ -71,27 +71,19 @@
 					</span>
 					<div>
 						{{ productColor }}, {{ productName }},{{ productBrand }},{{ releaseDate }},{{ productPrice }},{{
-							productWarranty
+							warrantyYear
 						}},{{ productDescription }}
 					</div>
 				</div>
 				<label>Upload Image </label>
 				<input id="file-input" type="file" class="border border-white" @change="uploadImage" />
 				<div>
-					<base-button
-						textColor="text-deepBlue"
-						buttonLabel="CANCLE"
-						buttonColor="bg-white"
-						class="float-right ml-5"
-						@click="closeCurrentForm"
-					></base-button>
-					<base-button
-						textColor="text-white"
-						buttonLabel="SAVE"
-						buttonColor="bg-deepBlue"
-						class="float-right"
-						buttonType="submit"
-					></base-button>
+					<button type="cencle" class="btn  text-deepBlue bg-white float-right ml-5" @click="closeCurrentForm">
+						cancle
+					</button>
+					<button type="submit" class="btn  text-white bg-deepBlue float-right ml-5">
+						submit
+					</button>
 				</div>
 			</div>
 		</form>
@@ -165,7 +157,7 @@ export default {
 			productBrand: this.brand,
 			releaseDate: this.date,
 			productPrice: this.price,
-			productWarranty: this.warranty,
+			warrantyYear: this.warranty,
 			productDescription: this.description,
 			productColor: [],
 
