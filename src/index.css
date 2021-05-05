@@ -62,3 +62,6 @@ option {
 .colorSpan {
 	@apply ml-1 h-7 w-7  rounded-full inline-block border border-black mr-4;
 }
+.btn {
+	@apply px-3 py-1 mt-1 border border-deepBlue w-36 h-14 font-medium text-xl rounded-md uppercase;
+}
