@@ -12,17 +12,18 @@
 							placeholder="Car Name"
 							class="px-4 py-4 mb-4 rounded-md text-gray-500"
 						/>
+						<p v-if="errors" class="text-xl text-red-600 ">please fill with name{{ errors.productName }}!</p>
 					</div>
 					<!-- ml-2 -->
 					<div class="formAlignment">
 						<label>Brand</label>
 						<select id="brand" class="px-4 py-4  rounded border border-skyBlue" v-model="productBrand">
-							<option value="audi">Audi</option>
-							<option value="ferrari">Ferrari</option>
-							<option value="lamborghini">Lamborghini</option>
-							<option value="maserati">Maserati</option>
-							<option value="porsche">Porsche</option>
-							<option value="rollsroyce">Rolls Royce</option>
+							<option value="Audi">Audi</option>
+							<option value="Ferrari">Ferrari</option>
+							<option value="Lamborghini">Lamborghini</option>
+							<option value="Maserati">Maserati</option>
+							<option value="Porsche">Porsche</option>
+							<option value="Rollsroyce">Rolls Royce</option>
 						</select>
 					</div>
 				</div>
@@ -65,13 +66,13 @@
 				<div class="mb-5">
 					<label class="mr-5">Colors </label>
 					<span v-for="c in colorsArray" v-bind:key="c.id" class="flex-row">
-						<input type="checkbox" v-model="productColor.colorCollection" :id="c.name" :value="c.value" />
-						<span class="colorSpan" :class="c.value" />
+						<input type="checkbox" v-model="productColor" :id="c.name" :value="c.name" />
+						<span class="colorSpan" :class="c.spanValue" />
 					</span>
 					<div>
-						{{ productColor.colorCollection }}, {{ productName }},{{ productBrand }},{{ releaseDate }},{{
-							productPrice
-						}},{{ productWarranty }},{{ productDescription }}
+						{{ productColor }}, {{ productName }},{{ productBrand }},{{ releaseDate }},{{ productPrice }},{{
+							productWarranty
+						}},{{ productDescription }}
 					</div>
 				</div>
 				<label>Upload Image </label>
@@ -82,14 +83,14 @@
 						buttonLabel="CANCLE"
 						buttonColor="bg-white"
 						class="float-right ml-5"
-						buttonType="submit"
+						@click="closeCurrentForm"
 					></base-button>
 					<base-button
 						textColor="text-white"
 						buttonLabel="SAVE"
 						buttonColor="bg-deepBlue"
 						class="float-right"
-						@click="closeCurrentForm"
+						buttonType="submit"
 					></base-button>
 				</div>
 			</div>
@@ -121,42 +122,43 @@ const constraints = {
 	productDescription: {
 		presence: true,
 	},
-	productColor: {
-		presence: true,
-	},
+	// productColor: {
+	// 	presence: true,
+	// },
 };
 export default {
 	name: "BaseForm",
 	// "color","carImgFromDb"
-	props: ["name", "brand", "date", "price", "warranty", "description", "colors", "carImgFromDb"],
-	emits: ["close", "save-product", "save-product-color"],
+	props: ["name", "brand", "date", "price", "warranty", "description", "colors"],
+	emits: ["save-product", "close"],
+	//"save-product-color"
 	data() {
 		return {
 			// productImg:this.carImgFromDb ? this.carImgFromDb : productImg,
 			colorsArray: [
 				{
 					name: "yellow",
-					value: "bg-yellowc",
+					spanValue: "bg-yellowc",
 				},
 				{
 					name: "red",
-					value: "bg-redc",
+					spanValue: "bg-redc",
 				},
 				{
 					name: "blue",
-					value: "bg-bluec",
+					spanValue: "bg-bluec",
 				},
 				{
 					name: "green",
-					value: "bg-greenc",
+					spanValue: "bg-greenc",
 				},
 				{
 					name: "black",
-					value: "bg-black",
+					spanValue: "bg-black",
 				},
 				{
 					name: "white",
-					value: "bg-white",
+					spanValue: "bg-white",
 				},
 			],
 			productName: this.name,
@@ -165,10 +167,13 @@ export default {
 			productPrice: this.price,
 			productWarranty: this.warranty,
 			productDescription: this.description,
+			productColor: [],
+
 			// productImg: this.carImgFromDb ? this.carImgFromDb : productImg,
-			productColor: {
-				colorCollection: [],
-			},
+			// productColor: {
+			// 	colorCollection: [],
+			// },
+			// productColor:[this.color]
 			errors: null,
 		};
 	},
@@ -176,14 +181,14 @@ export default {
 		closeCurrentForm() {
 			this.$emit("close", true);
 		},
-		uploadImage(e) {
-			const file = e.target.files[0] || e.dataTransfer.files[0];
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				this.productImg = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		},
+		// uploadImage(e) {
+		// 	const file = e.target.files[0] || e.dataTransfer.files[0];
+		// 	const reader = new FileReader();
+		// 	reader.onload = (e) => {
+		// 		this.product.productImg = e.target.result;
+		// 	};
+		// 	reader.readAsDataURL(file);
+		// },
 		checkForm() {
 			var validate = require("validate.js");
 			this.errors = validate(
@@ -194,38 +199,40 @@ export default {
 					productPrice: this.productPrice,
 					warrantyYear: this.warrantyYear,
 					productDescription: this.productDescription,
-					productColor: { productColor: [] },
+					// productColor: { productColor: [] },
+					productColor: this.productColor,
 				},
 				constraints
 			);
 			if (this.errors) {
 				console.log(this.errors);
 			} else {
+				// this.closeCurrentForm();
 				this.saveProductInfo();
-				this.closeCurrentForm();
-				this.saveProductColorsInfo();
-				// alert(this.productColor);
+				// this.saveProductColorsInfo();
+				alert("Add new product success");
 				// console.log(this.productColor);
 			}
 		},
 		saveProductInfo() {
-			let product = {
+			let products = {
 				name: this.productName,
 				brand: this.productBrand,
 				date: this.releaseDate,
 				price: this.productPrice,
 				warranty: this.productWarranty,
 				description: this.productDescription,
-				imgSrc: this.productImg,
+				colors: this.productColor,
+				// imgSrc: this.productImg,
 			};
-			this.$emit("save-product", product);
+			this.$emit("save-product", products);
 		},
-		saveProductColorsInfo() {
-			let productColor = {
-				colors: { productColor: [] },
-			};
-			this.$emit("save-product-color", productColor);
-		},
+		// saveProductColorsInfo() {
+		// 	let productColor = {
+		// 		colors: { productColor: [] },
+		// 	};
+		// 	this.$emit("save-product-color", productColor);
+		// },
 	},
 };
 </script>

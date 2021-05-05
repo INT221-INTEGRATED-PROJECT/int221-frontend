@@ -1,7 +1,7 @@
 <template>
-	<div class="grid grid-flow-col border border-greyBorderc rounded-md w-5/6 h-96 mt-16 ml-auto mr-auto">
+	<div class="grid grid-flow-col border border-greyBorderc rounded-md w-5/6 h-96  ml-auto mr-auto">
 		<div class="space-y-4 my-10 ml-auto mr-auto w-40">
-			<div class="w-36 ml-10 mt-20 clear-right">
+			<div class="w-36 ml-10 pt-14 clear-right">
 				<button
 					class="text-deepBlue bg-white px-3 py-1 mt-1 border border-deepBlue w-28 h-14 font-medium text-lg rounded-md"
 					@click="editButtonClick"
@@ -30,6 +30,8 @@
 			<span class="font-normal">{{ productPrice }}</span>
 			<p>Warranty :</p>
 			<span class="font-normal"> {{ productWarranty }}</span>
+			<p>Colors:</p>
+			<span class="font-normal"> {{ productColors }}</span>
 		</div>
 		<div class="grid grid-rows-2 grid-flow-row">
 			<img class="w-4/5 ml-auto mr-auto mt-20" src="../assets/Ferrari-812-Superfast.png" />
@@ -51,7 +53,15 @@ export default {
 	name: "ProductBlock",
 	// "productImg","productColor"
 	emits: ["edit-click", "delete-click"],
-	props: ["productName", "productBrand", "releaseDate", "productPrice", "productWarranty", "productDescription"],
+	props: [
+		"productName",
+		"productBrand",
+		"releaseDate",
+		"productPrice",
+		"productWarranty",
+		"productDescription",
+		"productColors",
+	],
 	methods: {
 		deleteButtonClick() {
 			this.$emit("delete-click", true);
