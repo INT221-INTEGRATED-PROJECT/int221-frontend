@@ -9,21 +9,53 @@
       "warranty": 5,
       "description": "Acceleration 0-100 km/h: 4.7 seconds Horsepower: 414 hp Max speed: 250 km/h Engine: 4L V8 Bi-Turbo",
       "colors": [
-        "yellow",
-        "red"
+        {
+          "name": "yellow",
+          "value": "bg-yellowc"
+        },
+        {
+          "name": "red",
+          "value": "bg-redc"
+        }
       ]
     },
     {
-      "name": "fgdgdgd",
-      "brand": "Ferrari",
+      "name": "vdvv",
+      "brand": "Audi",
       "date": "2021-05-12",
-      "price": "3533",
-      "warranty": "2",
-      "description": "dgdgdg",
+      "price": "2232",
+      "warranty": "3",
+      "description": "ffdfdfd",
       "colors": [
-        "yellow"
+        {
+          "name": "yellow",
+          "value": "bg-yellowc"
+        },
+        {
+          "name": "red",
+          "value": "bg-redc"
+        }
       ],
-      "id": 1001
+      "id": 1004
+    },
+    {
+      "name": "gdfhf",
+      "brand": "Lamborghini",
+      "date": "2021-05-28",
+      "price": "35353",
+      "warranty": "3",
+      "description": "Test ",
+      "colors": [
+        {
+          "name": "blue",
+          "value": "bg-bluec"
+        },
+        {
+          "name": "green",
+          "value": "bg-greenc"
+        }
+      ],
+      "id": 1005
     }
   ]
 }
