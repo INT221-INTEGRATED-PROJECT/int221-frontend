@@ -66,8 +66,8 @@
 				<div class="mb-5">
 					<label class="mr-5">Colors </label>
 					<span v-for="c in colorsArray" v-bind:key="c.id" class="flex-row">
-						<input type="checkbox" v-model="productColor" :id="c.name" :value="c.name" />
-						<span class="colorSpan" :class="c.spanValue" />
+						<input type="checkbox" v-model="productColor" :id="c.name" :value="c" />
+						<span class="colorSpan" :class="c.value" />
 					</span>
 					<div>
 						{{ productColor }}, {{ productName }},{{ productBrand }},{{ releaseDate }},{{ productPrice }},{{
@@ -130,27 +130,27 @@ export default {
 			colorsArray: [
 				{
 					name: "yellow",
-					spanValue: "bg-yellowc",
+					value: "bg-yellowc",
 				},
 				{
 					name: "red",
-					spanValue: "bg-redc",
+					value: "bg-redc",
 				},
 				{
 					name: "blue",
-					spanValue: "bg-bluec",
+					value: "bg-bluec",
 				},
 				{
 					name: "green",
-					spanValue: "bg-greenc",
+					value: "bg-greenc",
 				},
 				{
 					name: "black",
-					spanValue: "bg-black",
+					value: "bg-black",
 				},
 				{
 					name: "white",
-					spanValue: "bg-white",
+					value: "bg-white",
 				},
 			],
 			productName: this.name,

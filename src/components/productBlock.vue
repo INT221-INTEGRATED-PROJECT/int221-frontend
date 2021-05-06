@@ -23,7 +23,7 @@
 				name: {{ productName }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brand : {{ productBrand }}
 			</p>
 			<p>Description :</p>
-			<span class="font-normal"> {{ productDescription }} <br />Acceleration 0 - 100 km/h 308 km/hTop speed </span>
+			<span class="font-normal"> {{ productDescription }} <br /></span>
 			<p>Manufacturer Date :</p>
 			<span class="font-normal">{{ releaseDate }}</span>
 			<p>Price :</p>
@@ -31,19 +31,12 @@
 			<p>Warranty :</p>
 			<span class="font-normal"> {{ productWarranty }}</span>
 			<p>Colors:</p>
-			<span class="font-normal"> {{ productColors }}</span>
+			<!-- <span class="font-normal" v-for="p in productColor" :key="p.name">{{ p.name }} : {{ p.value }}</span> -->
 		</div>
 		<div class="grid grid-rows-2 grid-flow-row">
 			<img class="w-4/5 ml-auto mr-auto mt-20" src="../assets/Ferrari-812-Superfast.png" />
 			<div class="inline-flex items-center space-x-6  ml-auto mr-auto mb-48">
-				<div class="border border-gray-600 bg-black rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-white rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-redc rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-orangec rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-yellowc rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-greenc rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-bluec rounded-full w-6 h-6"></div>
-				<div class="border border-gray-600 bg-greyc rounded-full w-6 h-6"></div>
+				<div v-for="p in productColor" :key="p.name"><span class="colorSpan" :class="p.value"></span></div>
 			</div>
 		</div>
 	</div>
@@ -60,7 +53,7 @@ export default {
 		"productPrice",
 		"productWarranty",
 		"productDescription",
-		"productColors",
+		"productColor",
 	],
 	methods: {
 		deleteButtonClick() {

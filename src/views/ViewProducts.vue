@@ -31,6 +31,7 @@
 			:productPrice="p.price"
 			:productWarranty="p.warranty"
 			:productDescription="p.description"
+			:productColor="p.colors"
 			@click="selectedProducts(p)"
 			@delete-click="deleteProduct(p.id)"
 			@edit-click="openForm"
