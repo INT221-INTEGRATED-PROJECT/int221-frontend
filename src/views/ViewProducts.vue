@@ -47,6 +47,7 @@
 			:price="currentProduct.price"
 			:warranty="currentProduct.warranty"
 			:description="currentProduct.description"
+			:colors="currentProduct.colors"
 			@save-product="editProduct"
 			class="border-black border bg-white"
 		/>
