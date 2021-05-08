@@ -91,7 +91,7 @@
 						<input type="checkbox" v-model="productColor" :id="c.name" :value="c" />
 						<span class="colorSpan" :class="c.value" />
 					</span>
-					<span v-if="isProductColorEmpty" class="text-xl text-red-600 "> Color&#40; s &#41; need to be choose </span>
+					<span v-if="isProductColorEmpty" class="text-xl text-red-600 "> Color&#40;s&#41; need to be choosen </span>
 				</div>
 				<label>Upload Image </label>
 				<input id="file-input" type="file" class="border border-white" @change="uploadImage" />
