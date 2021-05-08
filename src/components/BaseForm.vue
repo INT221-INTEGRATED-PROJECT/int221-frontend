@@ -11,7 +11,7 @@
 							v-model="productName"
 							placeholder="Car Name"
 							class="px-4 py-4 mb-4 rounded-md text-gray-500"
-							:class="{ 'is-invalid': errors }"
+							:class="[errors ? 'isInvalid' : '']"
 						/>
 						<span v-if="errors" class="text-xl text-red-600 ">
 							{{ errors.productName }}
