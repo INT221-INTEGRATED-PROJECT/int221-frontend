@@ -1,0 +1,140 @@
+{
+  "products": [
+    {
+      "id": 1000,
+      "name": "Audi S7 5G ",
+      "brand": {
+        "id": 100,
+        "name": "Audi"
+      },
+      "date": "2017-12-25",
+      "price": 88000,
+      "warranty": 5,
+      "description": "Acceleration 0-100 km/h: 4.7 seconds Horsepower: 414 hp Max speed: 250 km/h Engine: 4L V8 Bi-Turbo",
+      "color": [
+        {
+          "colorCode": "15",
+          "hexCode": "#32612D"
+        },
+        {
+          "colorCode": "16",
+          "hexCode": "#FFDB21"
+        }
+      ]
+    },
+    {
+      "name": "erereregdddd",
+      "brand": {
+        "id": 200,
+        "name": "Ferrari"
+      },
+      "date": "2021-05-28",
+      "price": "34343",
+      "warranty": "3",
+      "description": "fdfdfdfddfdfdfree",
+      "color": [
+        {
+          "colorCode": "11",
+          "hexCode": "#000000"
+        },
+        {
+          "colorCode": "12",
+          "hexCode": "#FFFFFF"
+        },
+        {
+          "colorCode": "13",
+          "hexCode": "#C62121"
+        }
+      ],
+      "id": 1002
+    },
+    {
+      "name": "dfdfdf",
+      "brand": {
+        "id": 400,
+        "name": "Maserati"
+      },
+      "date": "2021-05-26",
+      "price": "34343",
+      "warranty": "3",
+      "description": "fdfdfccvcvfedfdfd",
+      "color": [],
+      "id": 1004
+    },
+    {
+      "name": "fdfdfd",
+      "brand": {
+        "brandId": 200,
+        "brandName": "Ferrari"
+      },
+      "date": "2021-05-04",
+      "price": "466565",
+      "warranty": "4",
+      "description": "gfgfbvbvbgfhfhfhf",
+      "color": [
+        {
+          "colorCode": 11,
+          "hexCode": "#000000"
+        },
+        {
+          "colorCode": 12,
+          "hexCode": "#FFFFFF"
+        }
+      ],
+      "imgSrc": "Capture.PNG",
+      "id": 1005
+    }
+  ],
+  "brands": [
+    {
+      "id": 100,
+      "name": "Audi"
+    },
+    {
+      "id": 200,
+      "name": "Ferrari"
+    },
+    {
+      "id": 300,
+      "name": "Lamborghini"
+    },
+    {
+      "id": 400,
+      "name": "Maserati"
+    },
+    {
+      "id": 500,
+      "name": "Porsche"
+    },
+    {
+      "id": 600,
+      "name": "Rolls Royce"
+    }
+  ],
+  "colors": [
+    {
+      "colorCode": "11",
+      "hexCode": "#000000"
+    },
+    {
+      "colorCode": "12",
+      "hexCode": "#FFFFFF"
+    },
+    {
+      "colorCode": "13",
+      "hexCode": "#C62121"
+    },
+    {
+      "colorCode": "14",
+      "hexCode": "#003DBB"
+    },
+    {
+      "colorCode": "15",
+      "hexCode": "#32612D"
+    },
+    {
+      "colorCode": "16",
+      "hexCode": "#FFDB21"
+    }
+  ]
+}

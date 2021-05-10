@@ -1,0 +1,10 @@
+networks:
+  default:
+    external:
+      name: int221-network
+services:
+  frontend:
+    build: .
+    image: ghcr.io/int221-integrated-project/int221-frontend
+    environment:
+      SERVICE_VERSION: v1
