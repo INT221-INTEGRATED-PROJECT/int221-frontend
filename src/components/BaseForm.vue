@@ -22,7 +22,7 @@
 					<div class="formAlignment ">
 						<label>Brand</label>
 						<select class="px-4 py-4  rounded border border-skyBlue mb-4 text-lg" v-model="productBrand">
-							<option v-for="b in brandsArray" :value="b" :key="b.brandId">{{ b.brandName }}</option>
+							<option v-for="b in brandsArray" :value="b.brandId" :key="b.brandId">{{ b.brandName }}</option>
 							<!-- <option   value="200">Ferrari</option>
 							<option   value="300">Lamborghini</option>
 							<option   value="400">Maserati</option>

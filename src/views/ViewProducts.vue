@@ -142,7 +142,7 @@ export default {
 		} catch (e) {
 			console.error(e);
 		}
-		// this.currentProduct = await this.productsArray[0];
+		this.currentProduct = await this.productsArray[0];
 	},
 };
 </script>
