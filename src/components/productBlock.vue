@@ -31,12 +31,16 @@
 			<p>Warranty :</p>
 			<span class="font-normal"> {{ productWarranty }}</span>
 			<p>Colors:</p>
-			<!-- <span class="font-normal" v-for="p in productColor" :key="p.name">{{ p.name }} : {{ p.value }}</span> -->
+			<span class="font-normal" v-for="p in productColor" :key="p.colorCode"
+				>{{ p.colorCode }} : {{ p.hexCode }} ,</span
+			>
 		</div>
 		<div class="grid grid-rows-2 grid-flow-row">
-			<img class="w-4/5 ml-auto mr-auto mt-20" src="../assets/Ferrari-812-Superfast.png" />
+			<!-- <img class="w-4/5 ml-auto mr-auto mt-20" :src="require(productImg)" /> -->
 			<div class="inline-flex items-center space-x-6  ml-auto mr-auto mb-48">
-				<div v-for="p in productColor" :key="p.name"><span class="colorSpan" :class="p.value"></span></div>
+				<div v-for="p in productColor" :key="p.colorCode">
+					<span class="colorSpan" :style="{ backgroundColor: p.hexCode }"></span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -54,9 +58,11 @@ export default {
 		"productWarranty",
 		"productDescription",
 		"productColor",
+		"productImg",
 	],
 	methods: {
 		deleteButtonClick() {
+			location.reload();
 			this.$emit("delete-click", true);
 		},
 		editButtonClick() {

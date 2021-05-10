@@ -1,17 +1,15 @@
 <template>
 	<div class="mr-auto ml-auto  h-screen w-3/4">
 		<form @submit.prevent="checkForm">
-			<div class="container w-4/5 p-8 mx-auto mt-10 rounded-lg">
+			<div class="container w-4/5 p-8 mx-auto  rounded-lg">
 				<div class="grid grid-cols-2 gap-4">
 					<div class="formAlignment">
 						<label>Car Name</label>
 						<input
 							type="text"
-							id="productName"
 							v-model="productName"
 							placeholder="Car Name"
 							class="px-4 py-4 mb-4 rounded-md text-gray-500"
-							:class="[errors ? 'isInvalid' : '']"
 						/>
 						<span v-if="errors" class="text-xl text-red-600 ">
 							{{ errors.productName }}
@@ -20,11 +18,11 @@
 							please fill with name
 						</p> -->
 					</div>
-					<!-- ml-2 -->
+					<!-- ml-2      -->
 					<div class="formAlignment ">
 						<label>Brand</label>
-						<select id="brand" class="px-4 py-4  rounded border border-skyBlue mb-4" v-model="productBrand">
-							<option value="100" v-for="b in brands" v-bind:key="b.id">{{ b.name }}</option>
+						<select class="px-4 py-4  rounded border border-skyBlue mb-4 text-lg" v-model="productBrand">
+							<option v-for="b in brandsArray" :value="b" :key="b.brandId">{{ b.brandName }}</option>
 							<!-- <option   value="200">Ferrari</option>
 							<option   value="300">Lamborghini</option>
 							<option   value="400">Maserati</option>
@@ -38,31 +36,19 @@
 				<div class="grid grid-cols-3 gap-4">
 					<div class="formAlignment ">
 						<label>Release Date</label>
-						<input
-							type="date"
-							id="releaseDate"
-							placeholder="MM//DD//YYYY"
-							class="px-4 py-4 mb-4 rounded-md"
-							v-model="releaseDate"
-						/>
+						<input type="date" placeholder="MM//DD//YYYY" class="px-4 py-4 mb-4 rounded-md" v-model="releaseDate" />
 						<div v-if="errors" class="text-xl text-red-600 ">
 							{{ errors.releaseDate }}
 						</div>
 					</div>
 					<div class="formAlignment">
 						<label>Price</label>
-						<input
-							type="text"
-							id="price"
-							placeholder="USD $ "
-							class="px-4 py-4  rounded-md mb-4 "
-							v-model="productPrice"
-						/>
+						<input type="text" placeholder="USD $ " class="px-4 py-4  rounded-md mb-4 " v-model="productPrice" />
 						<span v-if="errors" class="text-xl text-red-600  ">{{ errors.productPrice }}</span>
 					</div>
 					<div class="formAlignment">
 						<label>Warranty</label>
-						<select id="warranty" class="px-4 py-4  rounded border border-skyBlue mb-4" v-model="warrantyYear">
+						<select class="px-4 py-4  rounded border border-skyBlue mb-4" v-model="warrantyYear">
 							<option> 1 </option>
 							<option> 2 </option>
 							<option> 3 </option>
@@ -74,27 +60,25 @@
 				</div>
 				<div id="cardescript" class="formAlignment">
 					<label>Car Description</label>
-					<textarea
-						rows="3"
-						cols="5"
-						id="description"
-						class="p-9  rounded-md  border border-skyBlue"
-						v-model="productDescription"
-					/>
+					<textarea rows="2" cols="3" class="p-7  rounded-md  border border-skyBlue" v-model="productDescription" />
 					<span v-if="errors" class="text-2xl text-red-600 mt-4 ">
 						{{ errors.productDescription }}
 					</span>
 				</div>
+				<!-- :style="{ backgroundColor: c.hexCode }" -->
 				<div class="mb-5">
 					<label class="mr-5">Colors </label>
 					<span v-for="c in colorsArray" v-bind:key="c.id" class="flex-row">
-						<input type="checkbox" v-model="productColor" :id="c.name" :value="c" />
-						<span class="colorSpan" :class="c.value" />
+						<input type="checkbox" v-model="productColor" :value="c" true-value="yes" false-value="no" />
+						<span class="colorSpan" :style="{ backgroundColor: c.hexCode }" />
 					</span>
 					<span v-if="isProductColorEmpty" class="text-xl text-red-600 "> Color&#40;s&#41; need to be choosen </span>
 				</div>
 				<label>Upload Image </label>
-				<input id="file-input" type="file" class="border border-white" @change="uploadImage" />
+				<input type="file" class="border border-white" @change="handleFileUpload" />
+				<span v-if="errors" class="text-2xl text-red-600 mt-4 ">
+					{{ errors.productImg }}
+				</span>
 				<div>
 					<button type="cencle" class="btn  text-deepBlue bg-white float-right ml-5" @click="closeCurrentForm">
 						cancle
@@ -106,7 +90,7 @@
 				<span class="bg-green-200 "
 					>{{ productColor }}, {{ productName }},{{ productBrand }},{{ releaseDate }},{{ productPrice }},{{
 						warrantyYear
-					}},{{ productDescription }}
+					}},{{ productDescription }}, {{ productImg }} ,
 				</span>
 			</div>
 		</form>
@@ -114,6 +98,8 @@
 </template>
 
 <script>
+// import Store from "@/store/store.js";
+import axios from "axios";
 const constraints = {
 	productName: {
 		presence: {
@@ -135,7 +121,7 @@ const constraints = {
 			message: "is required",
 		},
 		numericality: {
-			lessThan: 99999,
+			lessThan: 99999999999,
 			greaterThan: 0,
 		},
 	},
@@ -151,96 +137,61 @@ const constraints = {
 		length: {
 			maximum: 300,
 			minimum: 10,
-			message: "Test length",
+			message: "must contain at least 10 charaters",
 		},
 	},
-	// productColor: {
-	// 	presence: true,
-	// },
+	productImg: {
+		presence: {
+			message: "is required",
+		},
+	},
 };
 
 export default {
 	name: "BaseForm",
-	// "color","carImgFromDb"
-	props: ["name", "brand", "date", "price", "warranty", "description", "colors"],
+	props: {
+		name: String,
+		brand: Object,
+		date: Date,
+		price: Number,
+		warranty: Number,
+		description: String,
+		color: Array,
+		imgSrc: String,
+		imgFile: File,
+	},
 	emits: ["save-product", "close"],
 	//"save-product-color"
 	data() {
 		return {
-			// productImg:this.carImgFromDb ? this.carImgFromDb : productImg,
-			colorsArray: [
-				{
-					name: "yellow",
-					value: "bg-yellowc",
-				},
-				{
-					name: "red",
-					value: "bg-redc",
-				},
-				{
-					name: "blue",
-					value: "bg-bluec",
-				},
-				{
-					name: "green",
-					value: "bg-greenc",
-				},
-				{
-					name: "black",
-					value: "bg-black",
-				},
-				{
-					name: "white",
-					value: "bg-white",
-				},
-			],
-			brands: [
-				{
-					id: 100,
-					name: "Audi",
-				},
-				{
-					id: 200,
-					name: "Ferrari",
-				},
-				{
-					id: 300,
-					name: "Lamborghini",
-				},
-				{
-					id: 400,
-					name: "Maserati",
-				},
-				{
-					id: 500,
-					name: "Porsche",
-				},
-				{
-					id: 600,
-					name: "Rolls Royce",
-				},
-			],
+			brandsArray: [],
+			colorsArray: [],
+			url: "http://52.163.127.86/backend",
 			productName: this.name,
 			productBrand: this.brand,
 			releaseDate: this.date,
 			productPrice: this.price,
 			warrantyYear: this.warranty,
 			productDescription: this.description,
+			productImg: this.imgSrc,
+			selectedFile: null,
 			productColor: [],
 			checkboxColorChecked: [],
 			isProductColorEmpty: false,
-			// productImg: this.imgSrc,
 			errors: [],
 		};
 	},
 
 	methods: {
+		handleFileUpload(e) {
+			this.selectedFile = e.target.files[0];
+			this.productImg = this.selectedFile.name;
+		},
 		closeCurrentForm() {
 			this.$emit("close", true);
 		},
 		checkForm() {
 			var validate = require("validate.js");
-			// validate({}, { productBrand: { inclusion: this.brands } });
 			this.errors = validate(
 				{
 					productName: this.productName,
@@ -249,8 +200,7 @@ export default {
 					productPrice: this.productPrice,
 					warrantyYear: this.warrantyYear,
 					productDescription: this.productDescription,
-					// productColor: { productColor: [] },
-					// productColor: this.productColor,
+					productImg: this.productImg,
 				},
 				constraints
 			);
@@ -258,10 +208,10 @@ export default {
 			if (this.errors) {
 				console.log(this.errors);
 			} else {
+				this.saveProductInfo();
 				this.closeCurrentForm();
-				// this.saveProductInfo();
 				alert("Add new product success");
-				// console.log(this.productColor);
+				location.reload();
 			}
 		},
 		saveProductInfo() {
@@ -272,20 +222,28 @@ export default {
 				price: this.productPrice,
 				warranty: this.warrantyYear,
 				description: this.productDescription,
-				colors: this.productColor,
-				// imgSrc: this.productImg,
+				color: this.productColor,
+				imgSrc: this.productImg,
 			};
-			this.$emit("save-product", products);
+			this.$emit("save-product", products, this.selectedFile);
 		},
-		checkedProductColors() {
-			this.checkboxColorChecked = [...this.productColor];
+		checkedProductColors(productColor) {
+			this.checkboxColorChecked = [...productColor];
 			this.checkboxColorChecked.foreach(function(i) {
-				i.toggleCheck = true;
+				// i.toggleCheck = true;
+				i.push({ toggleCheck: true });
 			});
 		},
-		// checkIfProductColorEmpty() {
-		// 	this.isProductColorEmpty = JSON.stringify(this.productColor) === "{}";
-		// },
+	},
+	async created() {
+		try {
+			const resB = await axios.get(this.url + `/brands/view`);
+			const resC = await axios.get(this.url + `/colors/view`);
+			this.colorsArray = resC.data;
+			this.brandsArray = resB.data;
+		} catch (e) {
+			console.error(e);
+		}
 	},
 };
 </script>
