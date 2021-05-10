@@ -3,59 +3,138 @@
     {
       "id": 1000,
       "name": "Audi S7 5G ",
-      "brand": "Audi",
-      "date": "12/25/2017",
+      "brand": {
+        "id": 100,
+        "name": "Audi"
+      },
+      "date": "2017-12-25",
       "price": 88000,
       "warranty": 5,
       "description": "Acceleration 0-100 km/h: 4.7 seconds Horsepower: 414 hp Max speed: 250 km/h Engine: 4L V8 Bi-Turbo",
-      "colors": [
+      "color": [
         {
-          "name": "yellow",
-          "value": "bg-yellowc"
+          "colorCode": "15",
+          "hexCode": "#32612D"
         },
         {
-          "name": "red",
-          "value": "bg-redc"
+          "colorCode": "16",
+          "hexCode": "#FFDB21"
         }
       ]
     },
     {
-      "name": "vdvv",
-      "brand": "Audi",
-      "date": "2021-05-12",
-      "price": "2232",
+      "name": "erereregdddd",
+      "brand": {
+        "id": 200,
+        "name": "Ferrari"
+      },
+      "date": "2021-05-28",
+      "price": "34343",
       "warranty": "3",
-      "description": "ffdfdfd",
-      "colors": [
+      "description": "fdfdfdfddfdfdfree",
+      "color": [
         {
-          "name": "yellow",
-          "value": "bg-yellowc"
+          "colorCode": "11",
+          "hexCode": "#000000"
         },
         {
-          "name": "red",
-          "value": "bg-redc"
+          "colorCode": "12",
+          "hexCode": "#FFFFFF"
+        },
+        {
+          "colorCode": "13",
+          "hexCode": "#C62121"
         }
       ],
+      "id": 1002
+    },
+    {
+      "name": "dfdfdf",
+      "brand": {
+        "id": 400,
+        "name": "Maserati"
+      },
+      "date": "2021-05-26",
+      "price": "34343",
+      "warranty": "3",
+      "description": "fdfdfccvcvfedfdfd",
+      "color": [],
       "id": 1004
     },
     {
-      "name": "gdfhf",
-      "brand": "Lamborghini",
-      "date": "2021-05-28",
-      "price": "35353",
-      "warranty": "3",
-      "description": "Test ",
-      "colors": [
+      "name": "fdfdfd",
+      "brand": {
+        "brandId": 200,
+        "brandName": "Ferrari"
+      },
+      "date": "2021-05-04",
+      "price": "466565",
+      "warranty": "4",
+      "description": "gfgfbvbvbgfhfhfhf",
+      "color": [
         {
-          "name": "blue",
-          "value": "bg-bluec"
+          "colorCode": 11,
+          "hexCode": "#000000"
         },
         {
-          "name": "green",
-          "value": "bg-greenc"
+          "colorCode": 12,
+          "hexCode": "#FFFFFF"
         }
       ],
+      "imgSrc": "Capture.PNG",
       "id": 1005
+    }
+  ],
+  "brands": [
+    {
+      "id": 100,
+      "name": "Audi"
+    },
+    {
+      "id": 200,
+      "name": "Ferrari"
+    },
+    {
+      "id": 300,
+      "name": "Lamborghini"
+    },
+    {
+      "id": 400,
+      "name": "Maserati"
+    },
+    {
+      "id": 500,
+      "name": "Porsche"
+    },
+    {
+      "id": 600,
+      "name": "Rolls Royce"
+    }
+  ],
+  "colors": [
+    {
+      "colorCode": "11",
+      "hexCode": "#000000"
+    },
+    {
+      "colorCode": "12",
+      "hexCode": "#FFFFFF"
+    },
+    {
+      "colorCode": "13",
+      "hexCode": "#C62121"
+    },
+    {
+      "colorCode": "14",
+      "hexCode": "#003DBB"
+    },
+    {
+      "colorCode": "15",
+      "hexCode": "#32612D"
+    },
+    {
+      "colorCode": "16",
+      "hexCode": "#FFDB21"
     }
   ]
 }
