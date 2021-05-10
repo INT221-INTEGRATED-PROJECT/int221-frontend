@@ -20,16 +20,15 @@ export default {
 	methods: {
 		async addNewProduct(newProduct) {
 			const products = {
-				productName: newProduct.name,
-				brandId: newProduct.brand,
-				releaseDate: newProduct.date,
+				productName: newProduct.productName,
+				brandId: newProduct.brandId,
+				releaseDate: newProduct.releaseDate,
 				price: newProduct.price,
 				warranty: newProduct.warranty,
 				description: newProduct.description,
-				colors: newProduct.color,
+				colors: newProduct.colors,
 				image: newProduct.imgSrc,
 			};
-
 			const formData = new FormData();
 			formData.append("file", this.selectedFile);
 			await axios.post(this.url + `/products/add`, products);

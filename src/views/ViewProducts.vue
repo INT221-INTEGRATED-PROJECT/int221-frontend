@@ -32,6 +32,7 @@
 			:productWarranty="p.warranty"
 			:productDescription="p.description"
 			:productColor="p.colors"
+			:productImg="p.image"
 			@click="selectedProducts(p)"
 			@delete-click="deleteProduct(p.id)"
 			@edit-click="openForm"
@@ -74,6 +75,7 @@ export default {
 			inputSearch: "",
 			currentProduct: [],
 			editClicked: false,
+			idPath: "",
 		};
 	},
 	methods: {
@@ -82,7 +84,7 @@ export default {
 		},
 		selectedProducts(products) {
 			this.currentProduct = products;
-			console.log(this.currentProduct);
+			console.log(this.currentProduct.productId);
 		},
 		async deleteProduct(id) {
 			// const res = await fetch(`${this.url}/${id}`, {
@@ -104,13 +106,13 @@ export default {
 		},
 		async editProduct(editingProduct) {
 			const products = {
-				name: editingProduct.name,
-				brand: editingProduct.brand,
-				date: editingProduct.date,
+				productName: editingProduct.productName,
+				brandId: editingProduct.brandId,
+				releaseDate: editingProduct.releaseDate,
 				price: editingProduct.price,
 				warranty: editingProduct.warranty,
 				description: editingProduct.description,
-				color: editingProduct.color,
+				colors: editingProduct.color,
 			};
 			try {
 				return await this.axios.put(`${this.url}/${this.currentProduct.id}`, products);
@@ -121,17 +123,17 @@ export default {
 		},
 	},
 	computed: {
-		// searchProduct() {
-		// 	if (this.inputSearch == "") {
-		// 		return this.products.slice().reverse();
-		// 	} else {
-		// 		let result = this.products.filter((n) => n.name.toLowerCase().includes(this.inputSearch.toLowerCase()));
-		// 		if (result == "") {
-		// 			return;
-		// 		}
-		// 		return result;
-		// 	}
-		// },
+		searchProduct() {
+			if (this.inputSearch == "") {
+				return this.productsArray.slice().reverse();
+			} else {
+				let result = this.productsArray.filter((n) => n.name.toLowerCase().includes(this.inputSearch.toLowerCase()));
+				if (result == "") {
+					return;
+				}
+				return result;
+			}
+		},
 	},
 	async created() {
 		try {
@@ -140,7 +142,7 @@ export default {
 		} catch (e) {
 			console.error(e);
 		}
-		this.currentProduct = await this.productsArray[0];
+		// this.currentProduct = await this.productsArray[0];
 	},
 };
 </script>
