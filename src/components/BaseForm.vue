@@ -211,7 +211,8 @@ export default {
 				this.saveProductInfo();
 				this.closeCurrentForm();
 				alert("Add new product success");
-				location.reload();
+
+				// location.reload();
 			}
 		},
 		saveProductInfo() {
@@ -225,7 +226,8 @@ export default {
 				colors: this.inputColor,
 				image: this.inputImg,
 			};
-			this.$emit("save-product", products, this.selectedFile);
+			console.log(products);
+			this.$emit("save-product", products);
 		},
 		checkedProductColors(productColor) {
 			this.checkboxColorChecked = [...productColor];

@@ -36,8 +36,8 @@
 				>{{ p.colorCode }} : {{ p.hexCode }} ,</span
 			>
 		</div>
-		<div class="grid grid-rows-2 grid-flow-row">
-			<img class="w-4/5 ml-auto mr-auto mt-20" :src="productImage" />
+		<div class="grid grid-rows-2 grid-flow-row ">
+			<img class="w-4/5 ml-auto mr-auto mt-20" :src="productImg" />
 			<div class="inline-flex items-center space-x-6  ml-auto mr-auto mb-48">
 				<div v-for="p in productColor" :key="p.colorCode">
 					<span class="colorSpan" :style="{ backgroundColor: p.hexCode }"></span>
@@ -72,8 +72,8 @@ export default {
 			return `${this.url}/imgs/view/${imgname}`;
 		},
 		deleteButtonClick() {
-			location.reload();
 			this.$emit("delete-click", true);
+			location.reload();
 		},
 		editButtonClick() {
 			this.$emit("edit-click", true);

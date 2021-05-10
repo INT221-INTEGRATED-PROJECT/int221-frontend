@@ -12,7 +12,7 @@ export default {
 	components: { HeadBar, BaseForm },
 	data() {
 		return {
-			url: "http://52.163.127.86/backend/",
+			url: "http://52.163.127.86/backend",
 			productsArray: [],
 			selectedFile: null,
 		};
@@ -27,12 +27,18 @@ export default {
 				warranty: newProduct.warranty,
 				description: newProduct.description,
 				colors: newProduct.colors,
-				image: newProduct.imgSrc,
+				image: newProduct.image,
 			};
-			const formData = new FormData();
-			formData.append("file", this.selectedFile);
-			await axios.post(this.url + `/products/add`, products);
-			await axios.post(this.url + `/imgs/add`, formData);
+			try {
+				let result = await axios.post(`${this.url}/products/add`, products);
+				console.log(result.response.data);
+			} catch (error) {
+				console.error(error.response.data); // NOTE - use "error.response.data` (not "error")
+			}
+			// const formData = new FormData();
+			// formData.append("file", this.selectedFile);
+			// await axios.post(`${this.url}/products/add`, products);
+			// await axios.post(this.url + `/imgs/add` + products.image, formData);
 			// this.products = responseP.data;
 			// this.selectedFile = response.data;
 		},

@@ -18,40 +18,37 @@
 			Search
 		</button>
 	</div>
-	<!-- <div class="bg-orangec mr-auto ml-auto h-12 mt-7  grid grid-rows-2">
-		<div class="bg-skyBlue"></div>
-	</div> -->
 
 	<BrandBlock></BrandBlock>
 	<div class=" w-full ml-auto mr-auto  mb-10" v-for="p in productsArray" :key="p.productId">
 		<ProductBlock
 			:productName="p.productName"
-			:productBrand="p.brandId"
+			:productBrand="p.brands.brandName"
 			:releaseDate="p.releaseDate"
 			:productPrice="p.price"
 			:productWarranty="p.warranty"
 			:productDescription="p.description"
 			:productColor="p.colors"
-			:productImg="p.image"
+			:productImg="getImage(p.image)"
 			@click="selectedProducts(p)"
-			@delete-click="deleteProduct(p.id)"
+			@delete-click="deleteProduct()"
 			@edit-click="openForm"
 		/>
-		<div class="bg-black inset-x-10 h-auto top-10 absolute z-0" v-if="editClicked">
-			<BaseForm
-				v-if="editClicked"
-				@close="changeEditItemClicked"
-				:productName="currentProduct.productName"
-				:brandId="currentProduct.brandId"
-				:releaseDate="currentProduct.releaseDate"
-				:price="currentProduct.price"
-				:warranty="currentProduct.warranty"
-				:description="currentProduct.description"
-				:colors="currentProduct.colors"
-				@save-product="editProduct"
-				class="border-black border bg-white"
-			/>
-		</div>
+	</div>
+	<div class="bg-black  h-auto absolute mt-auto mb-auto z-0" v-if="editClicked">
+		<BaseForm
+			v-if="editClicked"
+			@close="changeEditItemClicked"
+			:productName="currentProduct.productName"
+			:brandId="currentProduct.brandId"
+			:releaseDate="currentProduct.releaseDate"
+			:price="currentProduct.price"
+			:warranty="currentProduct.warranty"
+			:description="currentProduct.description"
+			:colors="currentProduct.colors"
+			@save-product="editProduct"
+			class="border-black border bg-white  "
+		/>
 	</div>
 </template>
 <script>
@@ -79,6 +76,9 @@ export default {
 		};
 	},
 	methods: {
+		getImage(imgname) {
+			return `${this.url}/imgs/view/${imgname}`;
+		},
 		changeEditItemClicked(value) {
 			this.editClicked = !value;
 		},
@@ -86,15 +86,9 @@ export default {
 			this.currentProduct = products;
 			console.log(this.currentProduct.productId);
 		},
-		async deleteProduct(id) {
-			// const res = await fetch(`${this.url}/${id}`, {
-			// 	method: "DELETE",
-			// });
-			// res.status === 200
-			// 	? (this.products = this.products.filter((p) => p.id !== id))
-			// 	: alert("Error to delete product");
+		async deleteProduct() {
 			try {
-				return await this.axios.delete(`${this.url}/products/delete/${id}`);
+				return await this.axios.delete(`${this.url}/products/delete/${this.currentProduct.productId}`);
 			} catch (e) {
 				console.error(e);
 				alert("Cannot delete this product");
@@ -113,6 +107,7 @@ export default {
 				warranty: editingProduct.warranty,
 				description: editingProduct.description,
 				colors: editingProduct.color,
+				image: editingProduct.image,
 			};
 			try {
 				return await this.axios.put(`${this.url}/${this.currentProduct.id}`, products);
