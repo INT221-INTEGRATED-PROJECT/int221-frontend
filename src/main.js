@@ -3,15 +3,17 @@ import App from "./App.vue";
 import router from "./router";
 import "./index.css";
 import BaseButton from "./components/BaseButton";
-// import Vue from "vue";
-// import Vuelidate from "vuelidate";
-// import axios from "axios";
-// import VueAxios from "vue-axios";
+import axios from "axios";
+import VueAxios from "vue-axios";
+// Vue.use(VueAxios,axios);
+// const app = createApp(App);
+// app.component("base-button", BaseButton);
+// app.use(VueAxios, axios);
+// app.use(Sto)
+// app.use(router).mount("#app");
 
-// Vue.use(VueAxios, axios)
-// createApp(App)
-// 	.use(router)
-// 	.mount("#app");
-const app = createApp(App);
-app.component("base-button", BaseButton);
-app.use(router).mount("#app");
+createApp(App)
+	.component("base-button", BaseButton)
+	.use(router)
+	.use(VueAxios, axios)
+	.mount("#app");

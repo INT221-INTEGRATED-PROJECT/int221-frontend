@@ -41,7 +41,7 @@ body {
 	@apply outline-none;
 }
 .headerbar {
-	@apply h-16 w-2/5  text-deepBlue  font-bold block border-0  border-b-2 border-opacity-0 text-center mx-10 text-5xl hover:border-deepBlue focus:border-deepBlue;
+	@apply h-16 w-2/5  text-deepBlue  font-bold block border-0  border-b-2 border-opacity-0 text-center mx-10 text-3xl hover:border-deepBlue focus:border-deepBlue;
 }
 label {
 	@apply text-2xl font-semibold pb-3;
@@ -54,7 +54,7 @@ input[type="text"],
 	@apply border border-skyBlue;
 }
 .formAlignment {
-	@apply flex flex-col mb-5 bg-blue-100;
+	@apply flex flex-col mb-5;
 }
 option {
 	@apply text-2xl;
@@ -66,5 +66,5 @@ option {
 	@apply px-3 py-1 mt-1 border border-deepBlue w-36 h-14 font-medium text-xl rounded-md uppercase;
 }
 .isInvalid {
-	@apply border-4 border-red-600 bg-red-500;
+	@apply border-4 border-red-600;
 }
