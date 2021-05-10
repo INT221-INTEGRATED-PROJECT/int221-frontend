@@ -204,7 +204,7 @@ export default {
 				},
 				constraints
 			);
-			this.isProductColorEmpty = this.productColor.length === 0 ? true : false;
+			this.isProductColorEmpty = this.inputColor.length === 0 ? true : false;
 			if (this.errors) {
 				console.log(this.errors);
 			} else {

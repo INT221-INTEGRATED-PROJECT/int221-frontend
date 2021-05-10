@@ -20,7 +20,8 @@
 		</div>
 		<div class="font-medium text-xl text-deepBlue mt-10 mb-auto ml-16">
 			<p class="text-center">
-				name: {{ productName }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brand : {{ productBrand }}
+				{{ productId }} name: {{ productName }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brand :
+				{{ productBrand }}
 			</p>
 			<p>Description :</p>
 			<span class="font-normal"> {{ productDescription }} <br /></span>
@@ -36,7 +37,7 @@
 			>
 		</div>
 		<div class="grid grid-rows-2 grid-flow-row">
-			<!-- <img class="w-4/5 ml-auto mr-auto mt-20" :src="require(productImg)" /> -->
+			<img class="w-4/5 ml-auto mr-auto mt-20" :src="productImg" />
 			<div class="inline-flex items-center space-x-6  ml-auto mr-auto mb-48">
 				<div v-for="p in productColor" :key="p.colorCode">
 					<span class="colorSpan" :style="{ backgroundColor: p.hexCode }"></span>
@@ -51,6 +52,7 @@ export default {
 	// "productImg","productColor"
 	emits: ["edit-click", "delete-click"],
 	props: [
+		"productId",
 		"productName",
 		"productBrand",
 		"releaseDate",
