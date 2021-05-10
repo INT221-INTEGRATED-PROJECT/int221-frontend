@@ -23,15 +23,15 @@
 	</div> -->
 
 	<BrandBlock></BrandBlock>
-	<div class=" w-full ml-auto mr-auto  mb-10" v-for="p in products" :key="p.id">
+	<div class=" w-full ml-auto mr-auto  mb-10" v-for="p in productsArray" :key="p.productId">
 		<ProductBlock
-			:productName="p.name"
-			:productBrand="p.brand"
-			:releaseDate="p.date"
+			:productName="p.productName"
+			:productBrand="p.brandId"
+			:releaseDate="p.releaseDate"
 			:productPrice="p.price"
 			:productWarranty="p.warranty"
 			:productDescription="p.description"
-			:productColor="p.color"
+			:productColor="p.colors"
 			@click="selectedProducts(p)"
 			@delete-click="deleteProduct(p.id)"
 			@edit-click="openForm"
@@ -40,13 +40,13 @@
 			<BaseForm
 				v-if="editClicked"
 				@close="changeEditItemClicked"
-				:name="currentProduct.name"
-				:brand="currentProduct.brand"
-				:date="currentProduct.date"
+				:productName="currentProduct.productName"
+				:brandId="currentProduct.brandId"
+				:releaseDate="currentProduct.releaseDate"
 				:price="currentProduct.price"
 				:warranty="currentProduct.warranty"
 				:description="currentProduct.description"
-				:color="currentProduct.color"
+				:colors="currentProduct.colors"
 				@save-product="editProduct"
 				class="border-black border bg-white"
 			/>
@@ -69,7 +69,7 @@ export default {
 	},
 	data() {
 		return {
-			url: "http://52.163.127.86/products",
+			url: "http://52.163.127.86/backend",
 			productsArray: [],
 			inputSearch: "",
 			currentProduct: [],
@@ -92,7 +92,7 @@ export default {
 			// 	? (this.products = this.products.filter((p) => p.id !== id))
 			// 	: alert("Error to delete product");
 			try {
-				return await this.axios.delete(`${this.url}/${id}`);
+				return await this.axios.delete(`${this.url}/products/delete/${id}`);
 			} catch (e) {
 				console.error(e);
 				alert("Cannot delete this product");
@@ -134,8 +134,13 @@ export default {
 		// },
 	},
 	async created() {
-		this.productsArray = await axios.get(`${this.url}/view`).then((response) => (this.productsArray = response.data));
-		this.currentProduct = await this.products[0];
+		try {
+			const res = await axios.get(this.url + `/products/view`);
+			this.productsArray = res.data;
+		} catch (e) {
+			console.error(e);
+		}
+		this.currentProduct = await this.productsArray[0];
 	},
 };
 </script>

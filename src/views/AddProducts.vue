@@ -12,28 +12,28 @@ export default {
 	components: { HeadBar, BaseForm },
 	data() {
 		return {
-			url: "http://localhost:3000/products",
-			products: [],
+			url: "http://52.163.127.86/backend/",
+			productsArray: [],
 			selectedFile: null,
 		};
 	},
 	methods: {
 		async addNewProduct(newProduct) {
 			const products = {
-				name: newProduct.name,
-				brand: newProduct.brand,
-				date: newProduct.date,
+				productName: newProduct.name,
+				brandId: newProduct.brand,
+				releaseDate: newProduct.date,
 				price: newProduct.price,
 				warranty: newProduct.warranty,
 				description: newProduct.description,
-				color: newProduct.color,
-				imgSrc: newProduct.imgSrc,
+				colors: newProduct.color,
+				image: newProduct.imgSrc,
 			};
 
 			const formData = new FormData();
 			formData.append("file", this.selectedFile);
-			await axios.post(this.url, products);
-			await axios.post(this.url, formData);
+			await axios.post(this.url + `/products/add`, products);
+			await axios.post(this.url + `/imgs/add`, formData);
 			// this.products = responseP.data;
 			// this.selectedFile = response.data;
 		},
