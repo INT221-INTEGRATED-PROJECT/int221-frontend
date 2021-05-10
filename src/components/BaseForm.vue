@@ -7,12 +7,12 @@
 						<label>Car Name</label>
 						<input
 							type="text"
-							v-model="productName"
+							v-model="inputName"
 							placeholder="Car Name"
 							class="px-4 py-4 mb-4 rounded-md text-gray-500"
 						/>
 						<span v-if="errors" class="text-xl text-red-600 ">
-							{{ errors.productName }}
+							{{ errors.inputName }}
 						</span>
 						<!-- <p class="text-xl text-red-600 ">
 							please fill with name
@@ -36,48 +36,48 @@
 				<div class="grid grid-cols-3 gap-4">
 					<div class="formAlignment ">
 						<label>Release Date</label>
-						<input type="date" placeholder="MM//DD//YYYY" class="px-4 py-4 mb-4 rounded-md" v-model="releaseDate" />
+						<input type="date" placeholder="MM//DD//YYYY" class="px-4 py-4 mb-4 rounded-md" v-model="inputDate" />
 						<div v-if="errors" class="text-xl text-red-600 ">
-							{{ errors.releaseDate }}
+							{{ errors.inputDate }}
 						</div>
 					</div>
 					<div class="formAlignment">
 						<label>Price</label>
-						<input type="text" placeholder="USD $ " class="px-4 py-4  rounded-md mb-4 " v-model="productPrice" />
-						<span v-if="errors" class="text-xl text-red-600  ">{{ errors.productPrice }}</span>
+						<input type="text" placeholder="USD $ " class="px-4 py-4  rounded-md mb-4 " v-model="inputPrice" />
+						<span v-if="errors" class="text-xl text-red-600  ">{{ errors.inputPrice }}</span>
 					</div>
 					<div class="formAlignment">
 						<label>Warranty</label>
-						<select class="px-4 py-4  rounded border border-skyBlue mb-4" v-model="warrantyYear">
+						<select class="px-4 py-4  rounded border border-skyBlue mb-4" v-model="inputWarranty">
 							<option> 1 </option>
 							<option> 2 </option>
 							<option> 3 </option>
 							<option> 4 </option>
 							<option> 5 </option>
 						</select>
-						<span v-if="errors" class="text-xl text-red-600 ">{{ errors.warrantyYear }}</span>
+						<span v-if="errors" class="text-xl text-red-600 ">{{ errors.inputWarranty }}</span>
 					</div>
 				</div>
 				<div id="cardescript" class="formAlignment">
 					<label>Car Description</label>
-					<textarea rows="2" cols="3" class="p-7  rounded-md  border border-skyBlue" v-model="productDescription" />
+					<textarea rows="2" cols="3" class="p-7  rounded-md  border border-skyBlue" v-model="inputDescription" />
 					<span v-if="errors" class="text-2xl text-red-600 mt-4 ">
-						{{ errors.productDescription }}
+						{{ errors.inputDescription }}
 					</span>
 				</div>
 				<!-- :style="{ backgroundColor: c.hexCode }" -->
 				<div class="mb-5">
 					<label class="mr-5">Colors </label>
-					<span v-for="c in colorsArray" v-bind:key="c.id" class="flex-row">
-						<input type="checkbox" v-model="productColor" :value="c" true-value="yes" false-value="no" />
+					<span v-for="c in colorsArray" v-bind:key="c.colorCode" class="flex-row">
+						<input type="checkbox" v-model="inputColor" :value="c" true-value="yes" false-value="no" />
 						<span class="colorSpan" :style="{ backgroundColor: c.hexCode }" />
 					</span>
 					<span v-if="isProductColorEmpty" class="text-xl text-red-600 "> Color&#40;s&#41; need to be choosen </span>
 				</div>
 				<label>Upload Image </label>
-				<input type="file" class="border border-white" @change="handleFileUpload" />
+				<input type="file" class="border border-white" @change="handleFileUpload" accept="image/png" />
 				<span v-if="errors" class="text-2xl text-red-600 mt-4 ">
-					{{ errors.productImg }}
+					{{ errors.inputImg }}
 				</span>
 				<div>
 					<button type="cencle" class="btn  text-deepBlue bg-white float-right ml-5" @click="closeCurrentForm">
@@ -88,9 +88,9 @@
 					</button>
 				</div>
 				<span class="bg-green-200 "
-					>{{ productColor }}, {{ productName }},{{ productBrand }},{{ releaseDate }},{{ productPrice }},{{
-						warrantyYear
-					}},{{ productDescription }}, {{ productImg }} ,
+					>{{ inputColor }}, {{ inputName }},{{ productBrand }},{{ inputDate }},{{ inputPrice }},{{ inputWarranty }},{{
+						inputDescription
+					}}, {{ inputImg }} ,
 				</span>
 			</div>
 		</form>
@@ -101,7 +101,7 @@
 // import Store from "@/store/store.js";
 import axios from "axios";
 const constraints = {
-	productName: {
+	inputName: {
 		presence: {
 			message: "is required",
 		},
@@ -111,12 +111,12 @@ const constraints = {
 			message: "is required",
 		},
 	},
-	releaseDate: {
+	inputDate: {
 		presence: {
 			message: "is required",
 		},
 	},
-	productPrice: {
+	inputPrice: {
 		presence: {
 			message: "is required",
 		},
@@ -125,12 +125,12 @@ const constraints = {
 			greaterThan: 0,
 		},
 	},
-	warrantyYear: {
+	inputWarranty: {
 		presence: {
 			message: "is required",
 		},
 	},
-	productDescription: {
+	inputDescription: {
 		presence: {
 			message: "is required",
 		},
@@ -140,7 +140,7 @@ const constraints = {
 			message: "must contain at least 10 charaters",
 		},
 	},
-	productImg: {
+	inputImg: {
 		presence: {
 			message: "is required",
 		},
@@ -150,14 +150,14 @@ const constraints = {
 export default {
 	name: "BaseForm",
 	props: {
-		name: String,
-		brand: Object,
-		date: Date,
+		productName: String,
+		brandId: Object,
+		releaseDate: Date,
 		price: Number,
 		warranty: Number,
 		description: String,
-		color: Array,
-		imgSrc: String,
+		colors: Array,
+		image: String,
 		imgFile: File,
 	},
 	emits: ["save-product", "close"],
@@ -167,15 +167,15 @@ export default {
 			brandsArray: [],
 			colorsArray: [],
 			url: "http://52.163.127.86/backend",
-			productName: this.name,
-			productBrand: this.brand,
-			releaseDate: this.date,
-			productPrice: this.price,
-			warrantyYear: this.warranty,
-			productDescription: this.description,
-			productImg: this.imgSrc,
+			inputName: this.productName,
+			productBrand: this.brandId,
+			inputDate: this.releaseDate,
+			inputPrice: this.price,
+			inputWarranty: this.warranty,
+			inputDescription: this.description,
+			inputImg: this.image,
 			selectedFile: null,
-			productColor: [],
+			inputColor: [],
 			checkboxColorChecked: [],
 			isProductColorEmpty: false,
 			errors: [],
@@ -185,7 +185,7 @@ export default {
 	methods: {
 		handleFileUpload(e) {
 			this.selectedFile = e.target.files[0];
-			this.productImg = this.selectedFile.name;
+			this.inputImg = this.selectedFile.name;
 		},
 		closeCurrentForm() {
 			this.$emit("close", true);
@@ -194,13 +194,13 @@ export default {
 			var validate = require("validate.js");
 			this.errors = validate(
 				{
-					productName: this.productName,
+					inputName: this.inputName,
 					productBrand: this.productBrand,
-					releaseDate: this.releaseDate,
-					productPrice: this.productPrice,
-					warrantyYear: this.warrantyYear,
-					productDescription: this.productDescription,
-					productImg: this.productImg,
+					inputDate: this.inputDate,
+					inputPrice: this.inputPrice,
+					inputWarranty: this.inputWarranty,
+					inputDescription: this.inputDescription,
+					inputImg: this.inputImg,
 				},
 				constraints
 			);
@@ -216,14 +216,14 @@ export default {
 		},
 		saveProductInfo() {
 			let products = {
-				name: this.productName,
-				brand: this.productBrand,
-				date: this.releaseDate,
-				price: this.productPrice,
-				warranty: this.warrantyYear,
-				description: this.productDescription,
-				color: this.productColor,
-				imgSrc: this.productImg,
+				productName: this.inputName,
+				brandId: this.productBrand,
+				releaseDate: this.inputDate,
+				price: this.inputPrice,
+				warranty: this.inputWarranty,
+				description: this.inputDescription,
+				colors: this.inputColor,
+				image: this.inputImg,
 			};
 			this.$emit("save-product", products, this.selectedFile);
 		},
