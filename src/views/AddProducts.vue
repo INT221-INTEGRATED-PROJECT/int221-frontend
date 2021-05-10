@@ -6,6 +6,7 @@
 <script>
 import HeadBar from "@/components/HeadBar.vue";
 import BaseForm from "@/components/BaseForm.vue";
+import axios from "axios";
 export default {
 	// props:["add"]
 	components: { HeadBar, BaseForm },
@@ -13,37 +14,29 @@ export default {
 		return {
 			url: "http://localhost:3000/products",
 			products: [],
+			selectedFile: null,
 		};
 	},
 	methods: {
-		// async fetchProduct() {
-		// 	const res = await fetch(this.url);
-		// 	const data = await res.json();
-		// 	return data;
-		// },
 		async addNewProduct(newProduct) {
-			const res = await fetch(this.url, {
-				method: "POST",
-				headers: {
-					"Content-type": "application/json",
-				},
-				body: JSON.stringify({
-					name: newProduct.name,
-					brand: newProduct.brand,
-					date: newProduct.date,
-					price: newProduct.price,
-					warranty: newProduct.warranty,
-					description: newProduct.description,
-					colors: newProduct.colors,
-				}),
-			});
-			const data = await res.json();
-			this.products = [...this.products, data];
+			const products = {
+				name: newProduct.name,
+				brand: newProduct.brand,
+				date: newProduct.date,
+				price: newProduct.price,
+				warranty: newProduct.warranty,
+				description: newProduct.description,
+				color: newProduct.color,
+				imgSrc: newProduct.imgSrc,
+			};
+
+			const formData = new FormData();
+			formData.append("file", this.selectedFile);
+			await axios.post(this.url, products);
+			await axios.post(this.url, formData);
+			// this.products = responseP.data;
+			// this.selectedFile = response.data;
 		},
 	},
-	// async created() {
-	// 	this.products = await this.fetchProduct();
-	// 	// this.currentStudent = await this.studentInfo[0];
-	// },
 };
 </script>

@@ -31,26 +31,26 @@
 			:productPrice="p.price"
 			:productWarranty="p.warranty"
 			:productDescription="p.description"
-			:productColor="p.colors"
+			:productColor="p.color"
 			@click="selectedProducts(p)"
 			@delete-click="deleteProduct(p.id)"
 			@edit-click="openForm"
 		/>
-	</div>
-	<div class="bg-black inset-x-10 h-auto top-10 absolute z-0" v-if="editClicked">
-		<BaseForm
-			v-if="editClicked"
-			@close="changeEditItemClicked"
-			:name="currentProduct.name"
-			:brand="currentProduct.brand"
-			:date="currentProduct.date"
-			:price="currentProduct.price"
-			:warranty="currentProduct.warranty"
-			:description="currentProduct.description"
-			:colors="currentProduct.colors"
-			@save-product="editProduct"
-			class="border-black border bg-white"
-		/>
+		<div class="bg-black inset-x-10 h-auto top-10 absolute z-0" v-if="editClicked">
+			<BaseForm
+				v-if="editClicked"
+				@close="changeEditItemClicked"
+				:name="currentProduct.name"
+				:brand="currentProduct.brand"
+				:date="currentProduct.date"
+				:price="currentProduct.price"
+				:warranty="currentProduct.warranty"
+				:description="currentProduct.description"
+				:color="currentProduct.color"
+				@save-product="editProduct"
+				class="border-black border bg-white"
+			/>
+		</div>
 	</div>
 </template>
 <script>
@@ -59,6 +59,7 @@ import BrandBlock from "@/components/BrandBlock.vue";
 import HeadBar from "@/components/HeadBar.vue";
 import ProductBlock from "@/components/ProductBlock.vue";
 import BaseForm from "@/components/BaseForm.vue";
+import axios from "axios";
 export default {
 	components: {
 		BrandBlock,
@@ -68,8 +69,8 @@ export default {
 	},
 	data() {
 		return {
-			url: "http://localhost:3000/products",
-			products: [],
+			url: "http://52.163.127.86/products",
+			productsArray: [],
 			inputSearch: "",
 			currentProduct: [],
 			editClicked: false,
@@ -78,84 +79,62 @@ export default {
 	methods: {
 		changeEditItemClicked(value) {
 			this.editClicked = !value;
-			// alert(`changeEditItemClicked ${this.editClicked}`);
-		},
-		async fetchProduct() {
-			const res = await fetch(this.url);
-			const data = await res.json();
-			return data;
 		},
 		selectedProducts(products) {
 			this.currentProduct = products;
+			console.log(this.currentProduct);
 		},
 		async deleteProduct(id) {
-			const res = await fetch(`${this.url}/${id}`, {
-				method: "DELETE",
-			});
-			res.status === 200
-				? (this.products = this.products.filter((p) => p.id !== id))
-				: alert("Error to delete product");
+			// const res = await fetch(`${this.url}/${id}`, {
+			// 	method: "DELETE",
+			// });
+			// res.status === 200
+			// 	? (this.products = this.products.filter((p) => p.id !== id))
+			// 	: alert("Error to delete product");
+			try {
+				return await this.axios.delete(`${this.url}/${id}`);
+			} catch (e) {
+				console.error(e);
+				alert("Cannot delete this product");
+			}
 			this.currentProduct = this.products[this.products.length - 1];
 		},
 		openForm(value) {
 			this.editClicked = value;
-			// alert(this.editClicked);
 		},
 		async editProduct(editingProduct) {
-			const res = await fetch(`${this.url}/${this.currentProduct.id}`, {
-				method: "PUT",
-				headers: {
-					"Content-type": "application/json",
-				},
-				body: JSON.stringify({
-					name: editingProduct.name,
-					brand: editingProduct.brand,
-					date: editingProduct.date,
-					price: editingProduct.price,
-					warranty: editingProduct.warranty,
-					description: editingProduct.description,
-					colors: editingProduct.colors,
-				}),
-			});
-			const data = await res.json();
-			this.products = this.products.map(
-				(p) =>
-					p.id === data.id // eslint-disable-line no-mixed-spaces-and-tabs
-						? {
-								// eslint-disable-line no-mixed-spaces-and-tabs
-								...p, // eslint-disable-line no-mixed-spaces-and-tabs
-								name: data.name, // eslint-disable-line no-mixed-spaces-and-tabs
-								brand: data.brand, // eslint-disable-line no-mixed-spaces-and-tabs
-								date: data.date, // eslint-disable-line no-mixed-spaces-and-tabs
-								price: data.price, // eslint-disable-line no-mixed-spaces-and-tabs
-								warranty: data.warranty, // eslint-disable-line no-mixed-spaces-and-tabs
-								description: data.description, // eslint-disable-line no-mixed-spaces-and-tabs
-						  } // eslint-disable-line no-mixed-spaces-and-tabs
-						: p // eslint-disable-line no-mixed-spaces-and-tabs
-			); // eslint-disable-line no-mixed-spaces-and-tabs
-			this.currentProduct.name = editingProduct.name;
-			this.currentProduct.brand = editingProduct.brand;
-			this.currentProduct.date = editingProduct.date;
-			this.currentProduct.price = editingProduct.price;
-			this.currentProduct.warrnty = editingProduct.warranty;
-			this.currentProduct.description = editingProduct.description;
-		},
-	},
-	computed: {
-		searchProduct() {
-			if (this.inputSearch == "") {
-				return this.products.slice().reverse();
-			} else {
-				let result = this.products.filter((n) => n.name.toLowerCase().includes(this.inputSearch.toLowerCase()));
-				if (result == "") {
-					return;
-				}
-				return result;
+			const products = {
+				name: editingProduct.name,
+				brand: editingProduct.brand,
+				date: editingProduct.date,
+				price: editingProduct.price,
+				warranty: editingProduct.warranty,
+				description: editingProduct.description,
+				color: editingProduct.color,
+			};
+			try {
+				return await this.axios.put(`${this.url}/${this.currentProduct.id}`, products);
+			} catch (e) {
+				console.error(e);
+				alert("Cannot edit this product");
 			}
 		},
 	},
+	computed: {
+		// searchProduct() {
+		// 	if (this.inputSearch == "") {
+		// 		return this.products.slice().reverse();
+		// 	} else {
+		// 		let result = this.products.filter((n) => n.name.toLowerCase().includes(this.inputSearch.toLowerCase()));
+		// 		if (result == "") {
+		// 			return;
+		// 		}
+		// 		return result;
+		// 	}
+		// },
+	},
 	async created() {
-		this.products = await this.fetchProduct();
+		this.productsArray = await axios.get(`${this.url}/view`).then((response) => (this.productsArray = response.data));
 		this.currentProduct = await this.products[0];
 	},
 };
