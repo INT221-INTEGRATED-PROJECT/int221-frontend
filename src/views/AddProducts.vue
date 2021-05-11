@@ -19,7 +19,9 @@ export default {
 	},
 	methods: {
 		async addNewProduct(newProduct) {
+			const header = { "Content-Type": "application/json" };
 			const products = {
+				productId: newProduct.productId,
 				productName: newProduct.productName,
 				brandId: newProduct.brandId,
 				releaseDate: newProduct.releaseDate,
@@ -30,15 +32,15 @@ export default {
 				image: newProduct.image,
 			};
 			try {
-				let result = await axios.post(`${this.url}/products/add`, products);
+				let result = await axios.post(`${this.url}/products/add`, products, { header: header });
 				console.log(result.response.data);
 			} catch (error) {
 				console.error(error.response.data); // NOTE - use "error.response.data` (not "error")
 			}
-			// const formData = new FormData();
-			// formData.append("file", this.selectedFile);
+			const formData = new FormData();
+			formData.append("file", this.selectedFile);
 			// await axios.post(`${this.url}/products/add`, products);
-			// await axios.post(this.url + `/imgs/add` + products.image, formData);
+			await axios.post(this.url + `/imgs/add` + products.image, formData);
 			// this.products = responseP.data;
 			// this.selectedFile = response.data;
 		},

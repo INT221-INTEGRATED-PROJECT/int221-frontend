@@ -100,6 +100,7 @@ export default {
 		},
 		async editProduct(editingProduct) {
 			const products = {
+				productId: editingProduct.productId,
 				productName: editingProduct.productName,
 				brandId: editingProduct.brandId,
 				releaseDate: editingProduct.releaseDate,
