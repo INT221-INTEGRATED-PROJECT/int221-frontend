@@ -35,7 +35,7 @@
 			@edit-click="openForm"
 		/>
 	</div>
-	<div class="bg-black  h-auto absolute mt-auto mb-auto z-0" v-if="editClicked">
+	<div class="bg-black  inset-x-10 h-auto top-10 absolute z-0" v-if="editClicked">
 		<BaseForm
 			v-if="editClicked"
 			@close="changeEditItemClicked"

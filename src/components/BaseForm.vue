@@ -80,10 +80,10 @@
 					{{ errors.inputImg }}
 				</span>
 				<div class="mt-20">
-					<button type="cencle" class="btn  text-deepBlue bg-white float-right ml-5" @click="closeCurrentForm">
-						cancle
+					<button type="reset" class="btn  text-deepBlue bg-white float-right ml-5" @click="closeCurrentForm">
+						cancel
 					</button>
-					<button type="submit" class="btn  text-white bg-deepBlue float-left ml-5">
+					<button type="submit" class="btn  text-white bg-deepBlue float-left ml-5 sm:float-right">
 						submit
 					</button>
 				</div>
@@ -135,7 +135,7 @@ const constraints = {
 			message: "is required",
 		},
 		length: {
-			maximum: 300,
+			maximum: 400,
 			minimum: 10,
 			message: "must contain at least 10 charaters",
 		},
