@@ -1,10 +1,10 @@
 <template>
-	<div class="mr-auto ml-auto  h-screen w-3/4">
+	<div class="sm:mr-auto sm:ml-auto  sm:h-screen sm:w-3/4">
 		<form @submit.prevent="checkForm">
-			<div class="container w-4/5 p-8 mx-auto  rounded-lg">
+			<div class="container sm:w-4/5 sm:p-8 p-20 mx-auto  rounded-lg">
 				<div class="grid grid-cols-2 gap-4">
 					<div class="formAlignment">
-						<label>Car Name</label>
+						<label class="text-deepBlue sm:text-2xl text-xl ">Car Name</label>
 						<input
 							type="text"
 							v-model="inputName"
@@ -20,9 +20,9 @@
 					</div>
 					<!-- ml-2      -->
 					<div class="formAlignment ">
-						<label>Brand</label>
+						<label class="text-deepBlue sm:text-2xl text-xl">Brand</label>
 						<select class="px-4 py-4  rounded border border-skyBlue mb-4 text-lg" v-model="productBrand">
-							<option v-for="b in brandsArray" :value="b.brandId" :key="b.brandId">{{ b.brandName }}</option>
+							<option v-for="b in brandsArray" :value="b" :key="b.brandId">{{ b.brandName }}</option>
 							<!-- <option   value="200">Ferrari</option>
 							<option   value="300">Lamborghini</option>
 							<option   value="400">Maserati</option>
@@ -35,19 +35,19 @@
 				</div>
 				<div class="grid grid-cols-3 gap-4">
 					<div class="formAlignment ">
-						<label>Release Date</label>
+						<label class="text-deepBlue sm:text-2xl text-xl">Release Date</label>
 						<input type="date" placeholder="MM//DD//YYYY" class="px-4 py-4 mb-4 rounded-md" v-model="inputDate" />
 						<div v-if="errors" class="text-xl text-red-600 ">
 							{{ errors.inputDate }}
 						</div>
 					</div>
 					<div class="formAlignment">
-						<label>Price</label>
+						<label class="text-deepBlue sm:text-2xl text-xl">Price</label>
 						<input type="text" placeholder="USD $ " class="px-4 py-4  rounded-md mb-4 " v-model="inputPrice" />
 						<span v-if="errors" class="text-xl text-red-600  ">{{ errors.inputPrice }}</span>
 					</div>
 					<div class="formAlignment">
-						<label>Warranty</label>
+						<label class="text-deepBlue sm:text-2xl text-xl">Warranty</label>
 						<select class="px-4 py-4  rounded border border-skyBlue mb-4" v-model="inputWarranty">
 							<option> 1 </option>
 							<option> 2 </option>
@@ -59,39 +59,39 @@
 					</div>
 				</div>
 				<div id="cardescript" class="formAlignment">
-					<label>Car Description</label>
-					<textarea rows="2" cols="3" class="p-7  rounded-md  border border-skyBlue" v-model="inputDescription" />
+					<label class="text-deepBlue sm:text-2xl text-xl">Car Description</label>
+					<textarea rows="2" cols="3" class="p-7  rounded-md  border border-skyBlue h-40" v-model="inputDescription" />
 					<span v-if="errors" class="text-2xl text-red-600 mt-4 ">
 						{{ errors.inputDescription }}
 					</span>
 				</div>
 				<!-- :style="{ backgroundColor: c.hexCode }" -->
 				<div class="mb-5">
-					<label class="mr-5">Colors </label>
+					<label class="sm:mr-5 text-deepBlue sm:text-2xl text-xl">Colors </label>
 					<span v-for="c in colorsArray" v-bind:key="c.colorCode" class="flex-row">
 						<input type="checkbox" v-model="inputColor" :value="c" true-value="yes" false-value="no" />
 						<span class="colorSpan" :style="{ backgroundColor: c.hexCode }" />
 					</span>
 					<span v-if="isProductColorEmpty" class="text-xl text-red-600 "> Color&#40;s&#41; need to be choosen </span>
 				</div>
-				<label>Upload Image </label>
+				<label class="text-deepBlue sm:text-2xl text-xl">Upload Image </label>
 				<input type="file" class="border border-white" @change="handleFileUpload" accept="image/png" />
-				<span v-if="errors" class="text-2xl text-red-600 mt-4 ">
+				<span v-if="errors" class="text-2xl text-red-600 mt-4">
 					{{ errors.inputImg }}
 				</span>
-				<div>
+				<div class="mt-20">
 					<button type="cencle" class="btn  text-deepBlue bg-white float-right ml-5" @click="closeCurrentForm">
 						cancle
 					</button>
-					<button type="submit" class="btn  text-white bg-deepBlue float-right ml-5">
+					<button type="submit" class="btn  text-white bg-deepBlue float-left ml-5">
 						submit
 					</button>
 				</div>
-				<span class="bg-green-200 "
+				<!-- <span class="bg-green-200 "
 					>{{ inputColor }}, {{ inputName }},{{ productBrand }},{{ inputDate }},{{ inputPrice }},{{ inputWarranty }},{{
 						inputDescription
 					}}, {{ inputImg }} ,
-				</span>
+				</span> -->
 			</div>
 		</form>
 	</div>
@@ -204,15 +204,14 @@ export default {
 				},
 				constraints
 			);
-			this.isProductColorEmpty = this.inputColor.length === 0 ? true : false;
+			this.isProductColorEmpty = this.productColor.length === 0 ? true : false;
 			if (this.errors) {
 				console.log(this.errors);
 			} else {
 				this.saveProductInfo();
 				this.closeCurrentForm();
 				alert("Add new product success");
-
-				// location.reload();
+				location.reload();
 			}
 		},
 		saveProductInfo() {
@@ -226,8 +225,7 @@ export default {
 				colors: this.inputColor,
 				image: this.inputImg,
 			};
-			console.log(products);
-			this.$emit("save-product", products);
+			this.$emit("save-product", products, this.selectedFile);
 		},
 		checkedProductColors(productColor) {
 			this.checkboxColorChecked = [...productColor];

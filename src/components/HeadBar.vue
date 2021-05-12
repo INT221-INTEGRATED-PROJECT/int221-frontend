@@ -1,7 +1,7 @@
 <template>
-	<div class="grid grid-flow-col  justify-self-center my-5 ">
-		<router-link to="/viewproducts" class="headerbar justify justify-self-end mr-auto ">View Products</router-link>
-		<router-link to="/addproducts" class="headerbar">Add Product</router-link>
+	<div class="headerbar gap-0">
+		<router-link to="/viewproducts" class="headerbarMenu text-right justify justify-self-end">View Products</router-link>
+		<router-link to="/addproducts" class="headerbarMenu">Add Product</router-link>
 	</div>
 </template>
 <script>
@@ -9,3 +9,4 @@ export default {
 	name: "HeadBar",
 };
 </script>
+

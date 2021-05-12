@@ -2,8 +2,8 @@
 	<div class="">
 		<img src="../assets/car2.jpg" class="w-screen bg-center bg-cover" />
 		<div class="absolute bottom-1/2 left-5  px-5  text-6xl text-white uppercase">
-			<h1 class="font-bold ml-12 ">911 turbos</h1>
-			<h1>high performance</h1>
+			<h1 class="text-4xl sm:text-6xl font-bold ml-12 ">911 turbos</h1>
+            <h1 class="text-4xl sm:text-6xl">high performance</h1>
 		</div>
 	</div>
 	<div class="px-14 mt-10">
@@ -14,9 +14,9 @@
 			</div>
 			<div class="rowAlignment">
 				<div v-for="c in caynneDescription" :key="c.title" class="flex flex-row">
-					<div class="grid grid-rows-4  shadow-lg border border-gray-400">
+					<div class="sm:grid sm:grid-rows-4  shadow-lg border border-gray-400">
 						<span class="p-3 text-xl font-semibold">{{ c.title }}</span>
-						<span class="row-span-3  px-3 text-lg pb-6 pt-3">
+						<span class="row-span-4  px-3 text-lg pb-6 pt-3">
 							<p>{{ c.des }}</p></span
 						>
 					</div>
@@ -35,7 +35,7 @@ export default {
 			// message: "Test",
 			caynneDescription: [
 				{
-					title: "Unmistakeable Porsche DNA",
+					title: "Unmistakeable",
 					des:
 						"All Cayenne  models clearly express their heritage. Thanks to their heavily emphasised front wings, a bonnet withpower domes and characterictic three- part air intakes",
 				},

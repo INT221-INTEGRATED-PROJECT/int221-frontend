@@ -24,9 +24,9 @@ export default {
 			brandCars: [
 				{ brand: "Audi", imgSrc: require("@/assets/logo/audi_logo.png") },
 				{ brand: "Ferrari", imgSrc: require("@/assets/logo/ferrari_logo.png") },
-				{ brand: "Lamborgini", imgSrc: require("@/assets/logo/lamborghini_logo.png") },
+				{ brand: "Lamborghini", imgSrc: require("@/assets/logo/lamborghini_logo.png") },
 				{ brand: "Maserati", imgSrc: require("@/assets/logo/maserati_logo.png") },
-				{ brand: "Posrche", imgSrc: require("@/assets/logo/porsche_logo.png") },
+				{ brand: "Porsche", imgSrc: require("@/assets/logo/porsche_logo.png") },
 				{ brand: "Rolls Royce", imgSrc: require("@/assets/logo/rollsroyce_logo.png") },
 			],
 		};

@@ -10,9 +10,6 @@ body {
 .navbar {
 	@apply text-white uppercase text-lg bg-deepBlue px-20 sticky top-0 w-full;
 }
-.headerbar {
-	@apply h-10 w-4/12 text-deepBlue block border-0 border-deepBlue border-b-2 border-opacity-0 text-center mx-10  hover:border-deepBlue focus:border-deepBlue;
-}
 .baseBrandBlock {
 	@apply bg-white rounded-xl h-48  w-40 border border-black grid grid-rows-4;
 }
@@ -23,13 +20,13 @@ body {
 	@apply font-semibold text-center text-2xl;
 }
 .rowAlignment {
-	@apply flex flex-row space-x-4 justify-center;
+	@apply sm:flex sm:flex-row sm:space-x-4 space-y-4 sm:justify-center;
 }
 .teamblock {
-	@apply container w-11/12 p-8 mx-auto mt-10 rounded-lg grid grid-cols-3 gap-x-10;
+	@apply container sm:w-11/12 w-10/12 p-8 mx-auto mt-10 rounded-lg grid sm:grid-cols-3 grid-rows-3 sm:gap-x-10 gap-y-10;
 }
 .memberblock {
-	@apply border border-gray-600 grid rounded bg-skyBlue;
+	@apply border gap-x-6 border-gray-600 grid rounded bg-skyBlue sm:grid-rows-1 sm:grid-cols-1 grid-cols-2;
 }
 .teamimage {
 	@apply w-40 m-auto mt-6 mb-6;
@@ -41,7 +38,10 @@ body {
 	@apply outline-none;
 }
 .headerbar {
-	@apply h-16 w-2/5  text-deepBlue  font-bold block border-0  border-b-2 border-opacity-0 text-center mx-10 text-3xl hover:border-deepBlue focus:border-deepBlue;
+	@apply sm:grid-flow-col sm:mt-24 text-xl grid grid-cols-2 mt-10 mb-10 sm:gap-10;
+}
+.headerbarMenu {
+	@apply sm:h-10 w-28 text-deepBlue block border-0 border-deepBlue border-b-2 border-opacity-0  mx-10  hover:border-deepBlue focus:border-deepBlue;
 }
 label {
 	@apply text-2xl font-semibold pb-3;
@@ -64,7 +64,4 @@ option {
 }
 .btn {
 	@apply px-3 py-1 mt-1 border border-deepBlue w-36 h-14 font-medium text-xl rounded-md uppercase;
-}
-.isInvalid {
-	@apply border-4 border-red-600;
 }
